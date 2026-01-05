@@ -1,77 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en"> <!-- Set to English as the main content language -->
 
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
     <link rel="stylesheet" href="style.css">
+
     <title>Focus Sprint</title>
 </head>
 
 
 
 <body>
-    <!-- Header -->
-    <header>
-        <a href="">Focus Timer</a>
-        <section id="config">
-            <button>
-                <span class="material-symbols-outlined">
-                    settings
-                </span>
+
+    <!-- header block -->
+    <header class="header">
+        <span class="header__brand">Focus Sprint</span>
+        <div class="header__controls">
+            <button class="button-icon js-settings-button" aria-label="Settings">
+                <span class="material-symbols-outlined">settings</span>
             </button>
-            <button>
-                <span class="material-symbols-outlined">
-                    bedtime
-                </span>
+            <button class="button-icon js-dark-mode-toggle" aria-label="Toggle dark mode">
+                <span class="material-symbols-outlined">bedtime</span>
             </button>
-        </section>
+        </div>
     </header>
 
 
-    <!-- Main with the timer section and tasks section -->
+    <!-- Main block with timer as tasks sections -->
     <main>
-        <!-- Timer section -->
-        <section class="timer-section">
-            <div class="clock-timer">
+        <!-- Timer Section -->
+        <section class="timer">
+            <!-- Div for clock animation -->
+            <div class="timer__clock">
                 <!-- Stopwatch -->
-                <h1 class="timer"></h1>
+                <p class="timer__display js-timer-display">25:00</p>
 
-                <!-- Stopwatch btns section -->
-                <section class="controls-section">
+                <!-- Wrapper for the timer control buttons -->
+                <div class="timer__controls">
                     <!-- Reset button -->
-                    <button id="reset-btn">
-                        <span class="material-symbols-outlined">
-                            history
-                        </span>
+                    <button class="button-icon js-reset-button" aria-label="Reset timer">
+                        <span class="material-symbols-outlined">history</span>
                     </button>
                     <!-- Play/Stop button -->
-                    <button id="main-btn">PLAY</button>
+                    <button class="button button--primary js-play-pause-button">PLAY</button>
                     <!-- Skip button -->
-                    <button id="skip-btn">
-                        <span class="material-symbols-outlined">
-                            skip_next
-                        </span>
+                    <button class="button-icon js-skip-button" aria-label="Skip to next cycle">
+                        <span class="material-symbols-outlined">skip_next</span>
                     </button>
-                </section>
+                </div>
             </div>
         </section>
 
-        <!-- Tasks Section -->
-        <section class="tasks-section">
 
+        <!-- Tasks section -->
+        <section class="tasks" aria-labelledby="tasks-heading">
+            <div class="tasks__header">
+                <h2 class="tasks__title" id="tasks-heading">Tasks</h2>
+                <button class="button-icon js-task-options-button" aria-label="More task options">
+                    <span class="material-symbols-outlined">more_vert</span>
+                </button>
+            </div>
+            <div class="tasks__display">
+                <!-- Will show the tasks here -->
+            </div>
+            <button class="button button--tasks js-add-task-button">
+                <span class="material-symbols-outlined">
+                    add
+                </span>
+                Add Task
+            </button>
         </section>
     </main>
 
 
-
+    <script src="script.js"></script>
 </body>
-<script src="script.js"></script>
+
 
 
 </html>
