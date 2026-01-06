@@ -28,10 +28,10 @@
     <header class="header">
         <span class="header__brand">Focus Sprint</span>
         <div class="header__controls">
-            <button class="button-icon js-dark-mode-toggle" aria-label="Toggle dark mode">
+            <button class="button button-icon js-dark-mode-toggle" aria-label="Toggle dark mode">
                 <span class="material-symbols-outlined">bedtime</span>
             </button>
-            <button class="button-icon js-settings-button" aria-label="Settings">
+            <button class="button button-icon js-settings-button" aria-label="Settings">
                 <span class="material-symbols-outlined">settings</span>
             </button>
         </div>
@@ -43,9 +43,9 @@
         <!-- Timer Section -->
         <section class="timer">
             <div class="timer-modes">
-                <button>Focus Time</button>
-                <button>Break</button>
-                <button>Long break</button>
+                <button class="button button--time-mode js-button-focus">Focus Time</button>
+                <button class="button button--time-mode js-button-break">Break</button>
+                <button class="button button--time-mode js-button-long-break">Long break</button>
             </div>
             <!-- Div for clock animation -->
             <div class="timer__clock">
@@ -55,13 +55,13 @@
                 <!-- Wrapper for the timer control buttons -->
                 <div class="timer__controls">
                     <!-- Reset button -->
-                    <button class="button-icon js-reset-button" aria-label="Reset timer">
+                    <button class="button js-reset-button" aria-label="Reset timer">
                         <span class="material-symbols-outlined">history</span>
                     </button>
                     <!-- Play/Stop button -->
                     <button class="button button--primary js-play-pause-button">PLAY</button>
                     <!-- Skip button -->
-                    <button class="button-icon js-skip-button" aria-label="Skip to next cycle">
+                    <button class="button js-skip-button" aria-label="Skip to next cycle">
                         <span class="material-symbols-outlined">skip_next</span>
                     </button>
                 </div>
@@ -73,7 +73,7 @@
         <section class="tasks" aria-labelledby="tasks-heading">
             <div class="tasks__header">
                 <h2 class="tasks__title" id="tasks-heading">Tasks</h2>
-                <button class="button-icon js-task-options-button" aria-label="More task options">
+                <button class="button js-task-options-button" aria-label="More task options">
                     <span class="material-symbols-outlined">more_vert</span>
                 </button>
             </div>
