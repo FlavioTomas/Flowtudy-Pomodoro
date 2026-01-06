@@ -184,3 +184,10 @@ main {
 .button--tasks__add:hover {
     background-color: var(--color-surface);
 }
+
+.tasks__display {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+}
