@@ -42,29 +42,29 @@
     <main>
         <!-- Timer Section -->
         <section class="timer">
-            <div class="timer-modes">
-                <button class="button button--time-mode js-button-focus">Focus Time</button>
-                <button class="button button--time-mode js-button-break">Break</button>
-                <button class="button button--time-mode js-button-long-break">Long break</button>
-            </div>
             <!-- Div for clock animation -->
-            <div class="timer__clock">
-                <!-- Stopwatch -->
-                <p class="timer__display js-timer-display">25:00</p>
+            <div class="timer__clock"></div>
+            <!-- Div for the timer modes -->
+            <div class="timer-modes">
+                <button class="button button--time-mode js-focus-button">Focus Time</button>
+                <button class="button button--time-mode js-break-button">Break</button>
+                <button class="button button--time-mode js-long-break-button">Long break</button>
+            </div>
+            <!-- Stopwatch -->
+            <p class="timer__display js-timer-display">25:00</p>
 
-                <!-- Wrapper for the timer control buttons -->
-                <div class="timer__controls">
-                    <!-- Reset button -->
-                    <button class="button js-reset-button" aria-label="Reset timer">
-                        <span class="material-symbols-outlined">history</span>
-                    </button>
-                    <!-- Play/Stop button -->
-                    <button class="button button--primary js-play-pause-button">PLAY</button>
-                    <!-- Skip button -->
-                    <button class="button js-skip-button" aria-label="Skip to next cycle">
-                        <span class="material-symbols-outlined">skip_next</span>
-                    </button>
-                </div>
+            <!-- Wrapper for the timer control buttons -->
+            <div class="timer__controls">
+                <!-- Reset button -->
+                <button class="button js-reset-button" aria-label="Reset timer">
+                    <span class="material-symbols-outlined">history</span>
+                </button>
+                <!-- Play/Stop button -->
+                <button class="button button--primary js-play-pause-button">PLAY</button>
+                <!-- Skip button -->
+                <button class="button js-skip-button" aria-label="Skip to next cycle">
+                    <span class="material-symbols-outlined">skip_next</span>
+                </button>
             </div>
         </section>
 
