@@ -69,3 +69,13 @@ header {
 .button-icon:active {
     opacity: .5;
 }
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: clamp(70px, 80%, 600px);
+    gap: 10vh;
+}
+
