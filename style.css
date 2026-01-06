@@ -4,9 +4,7 @@
     --color-text-primary: #F0F0F0;
     --color-accent: #00C896;
     --color-surface: #2D3748;
-    /* Cor para superfícies como botões secundários */
     --color-muted: #A0AEC0;
-    /* Cor para texto menos importante */
 
     /* Fonts */
     --font-body: 'Inter', sans-serif;
@@ -22,7 +20,52 @@
     box-sizing: border-box;
 }
 
-html body {
-    width: 100%;
+html,
+body {
+    height: 100%;
 }
 
+body {
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: clamp(24px, 5vw, 48px);
+    gap: 10%;
+}
+
+
+header {
+    width: clamp(70px, 80%, 600px);
+
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+.header__brand {
+    font-size: clamp(1.35rem, 2vw, 3rem);
+    font-weight: 600;
+}
+
+.header__controls {
+    display: flex;
+    align-items: center;
+    gap: 1.5vw;
+}
+
+.button-icon {
+    background: none;
+    border: none;
+    color: var(--color-muted);
+}
+
+.button-icon:hover {
+    opacity: .7;
+} 
+
+.button-icon:active {
+    opacity: .5;
+}
