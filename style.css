@@ -71,7 +71,8 @@ header {
 } 
 
 .button-icon:active {
-    opacity: .5;
+    transition: none;
+    opacity: .4;
 }
 
 main {
@@ -109,11 +110,6 @@ main {
     background-color: var(--color-surface);
 }
 
-.button--time-mode:active {
-    transition: none;
-    transform: translateY(-0.5vh);
-}
-
 .timer__display {
     font-size: clamp(5rem, 8vw, 7rem);
     font-family: var(--font-display);
@@ -136,8 +132,40 @@ main {
     background-color: var(--color-accent-hover);
 }
 
-.button--primary:
-
 .button--secondary {
     transform: scale(1.25);
+}
+
+.button--secondary:hover {
+    opacity: .6;
+}
+
+.button--secondary:active {
+    transition: none;
+    opacity: .4;
+}
+
+.tasks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 5vh;
+}
+
+.tasks__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.button--tasks__options:hover {
+    background-color: var(--color-surface);
+}
+
+.button--tasks__options:active {
+    transition: none;
+    opacity: .4;
 }
