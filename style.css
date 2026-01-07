@@ -24,7 +24,7 @@
 html,
 body {
     height: 100%;
-    transition: 0.5s;
+    transition: 0.5s ease-in-out;
 }
 
 body {
@@ -114,6 +114,7 @@ main {
 .timer__display {
     font-size: clamp(5rem, 8vw, 7rem);
     font-family: var(--font-display);
+    transition: 0.5s ease-in-out;
 }
 
 .timer__controls {
