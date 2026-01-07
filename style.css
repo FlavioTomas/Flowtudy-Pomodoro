@@ -191,3 +191,8 @@ main {
     flex-direction: column;
     gap: 2vh;
 }
+
+.active {
+    background-color: var(--color-surface);
+    transform: translateY(-0.3vh);
+}

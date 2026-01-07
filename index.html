@@ -46,9 +46,9 @@
             <div class="timer__clock"></div>
             <!-- Div for the timer modes -->
             <div class="timer__modes">
-                <button class="button button--time-mode js-focus-button">Focus Time</button>
-                <button class="button button--time-mode js-break-button">Break</button>
-                <button class="button button--time-mode js-long-break-button">Long break</button>
+                <button class="button button--time-mode js-focus-button active" onclick="changeMode(focusButton)">Focus Time</button>
+                <button class="button button--time-mode js-break-button" onclick="changeMode(breakButton)">Break</button>
+                <button class="button button--time-mode js-long-break-button" onclick="changeMode(longBreakButton)">Long break</button>
             </div>
             <!-- Stopwatch -->
             <p class="timer__display js-timer-display">25:00</p>
