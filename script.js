@@ -95,24 +95,39 @@ darkModeToggle.addEventListener('click', () => {
 })
 
 
-const focusTime = 25
-const breakTime = 5
-const longBreakTime = 15
+let focusTime = 25
+let breakTime = 5
+let longBreakTime = 15
+focusTime *= 60;
+breakTime *= 60;
+longBreakTime *= 60;
 
 
-const startTimer = (time) => {
-    clearInterval(timerInterval);   
-    let totalSeconds = time * 60;
-    timerInterval = setInterval(() => {
-        totalSeconds--;
+function focusTimer() {
+    if (playPauseButton.classList.contains('playing')) {
+        clearInterval(timerInterval)
+        playPauseButton.classList.remove('playing')
+    } else {
+        timerInterval = setInterval(() => {
+            focusTime--;
 
-        updateTimerDisplay(totalSeconds)
-    }, 1000);
+            updateTimerDisplay(focusTime)
+        }, 1000);
+        playPauseButton.classList.add('playing')
+    }
+}
+
+const updateTimerDisplay = time => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    formattedTime = `${minutes}:${String(seconds).padStart(2, '0')}`;
+    timerDisplay.textContent = formattedTime;
+    document.title = `${formattedTime} - Focus Sprint`;
 }
 
 
 
-playPauseButton.addEventListener('click', () => startTimer(focusTime))
+playPauseButton.addEventListener('click', focusTimer)
 
 
 
