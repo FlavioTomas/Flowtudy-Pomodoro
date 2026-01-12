@@ -94,7 +94,7 @@ darkModeToggle.addEventListener('click', () => {
     timerDisplay.innerHTML = '25:00'
 })
 
-
+// timers amount and turning into seconds
 let focusTime = 25
 let breakTime = 5
 let longBreakTime = 15
@@ -103,6 +103,7 @@ breakTime *= 60;
 longBreakTime *= 60;
 
 
+// Function that plays the timer on focus mode
 function focusTimer() {
     if (playPauseButton.classList.contains('playing')) {
         clearInterval(timerInterval)
@@ -119,26 +120,53 @@ function focusTimer() {
     }
 }
 
+
+// function that update the timer display (to be used in any mode)
 const updateTimerDisplay = time => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
-    formattedTime = `${minutes}:${String(seconds).padStart(2, '0')}`;
+    const formattedTime = `${minutes}:${String(seconds).padStart(2, '0')}`;
     timerDisplay.textContent = formattedTime;
     document.title = `${formattedTime} - Focus Sprint`;
 }
 
+
+// function that update the play/pause button style (my goal is to use in any mode)
 const updatePlayButton = (condition) => {
-    if (condition){
+    if (condition) {
         playPauseButton.textContent = 'Play'
         playPauseButton.classList.remove('button--paused')
-    }else {
+    } else {
         playPauseButton.textContent = 'Pause'
         playPauseButton.classList.add('button--paused')
     }
 }
 
-playPauseButton.addEventListener('click', focusTimer)
 
+
+const resetTimer = timer => {
+    if (timer === focusTime) {
+        focusTime = 25
+        focusTime *= 60;
+        clearInterval(timerInterval)
+        updateTimerDisplay(focusTime)
+    } if (timer === breakTime) {
+        breakTime = 5
+        breakTime *= 60;
+        clearInterval(timerInterval)
+        updateTimerDisplay(breakTime)
+    } if (timer === longBreakTime) {
+        longBreakTime = 15
+        longBreakTime *= 60;
+        clearInterval(timerInterval)
+        updateTimerDisplay(longBreakTime)
+    }
+    updatePlayButton(true)
+    playPauseButton.classList.remove('playing')
+}
+
+playPauseButton.addEventListener('click', focusTimer)
+resetButton.addEventListener('click', () => resetTimer(focusTime))
 
 
 

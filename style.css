@@ -133,6 +133,7 @@ main {
 
 .button--paused {
     background-color: var(--color-accent-hover);
+    transform: translateY(-0.5vh);
 }
 
 .button--primary:hover {
