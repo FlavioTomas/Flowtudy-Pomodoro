@@ -1,3 +1,5 @@
+//-----------------------------------------------------------------------------------//
+//----------------------------   Variables Section   --------------------------------//
 // Getting modes buttons
 const focusButton = document.querySelector('.js-focus-button')
 const breakButton = document.querySelector('.js-break-button')
@@ -14,14 +16,21 @@ const rootElement = document.documentElement;
 const styles = getComputedStyle(rootElement);
 const colorSurface = styles.getPropertyValue('--color-surface')
 const colorBackground = styles.getPropertyValue('--color-background')
+// setting timerInterval variable so skipButton won't bug
+let timerInterval = null
 
 
+//-----------------------------------------------------------------------------------//
+//----------------------------   Theme Section   ------------------------------------//
 
 // Changing the background color and the timer display value according to the mode
 function changeBackgroundColor(newColor) {
     rootElement.style.setProperty('--color-background', newColor);
 }
-focusButton.addEventListener('click', () => {
+
+
+// Function with the theme colors of focus mode both in light and dark mode
+const focusButtonTheme = () => {
     if (body.classList.contains('dark-mode')) {
         changeBackgroundColor("#1E2A3A")
         rootElement.style.setProperty('--color-accent', '#00C896');
@@ -35,8 +44,12 @@ focusButton.addEventListener('click', () => {
     }
     updateTimerDisplay(focusTime)
     clearInterval(timerInterval)
-})
-breakButton.addEventListener('click', () => {
+    focusButton.classList.add('active')
+}
+
+
+// Function with the theme colors of break mode both in light and dark mode
+const breakButtonTheme = () => {
     if (body.classList.contains('dark-mode')) {
         changeBackgroundColor("#0f2e24ff")
         rootElement.style.setProperty('--color-accent', '#52d864ff');
@@ -50,8 +63,12 @@ breakButton.addEventListener('click', () => {
     }
     updateTimerDisplay(breakTime)
     clearInterval(timerInterval)
-})
-longBreakButton.addEventListener('click', () => {
+    breakButton.classList.add('active')
+}
+
+
+// Function with the theme colors of longBreak mode both in light and dark mode
+const longBreakButtonTheme = () => {
     if (body.classList.contains('dark-mode')) {
         changeBackgroundColor("#461935")
         rootElement.style.setProperty('--color-accent', '#b82f83ff');
@@ -65,10 +82,12 @@ longBreakButton.addEventListener('click', () => {
     }
     updateTimerDisplay(longBreakTime)
     clearInterval(timerInterval)
-})
+    longBreakButton.classList.add('active')
+}
 
-// Changing between dark and light mode
-darkModeToggle.addEventListener('click', () => {
+
+// Function with the theme colors of the text both in light and dark mode
+const darkModeTheme = () => {
     if (body.classList.contains('dark-mode')) {
         changeBackgroundColor("#e7ffebff");
         rootElement.style.setProperty('--color-text-primary', '#1f1f1fff');
@@ -89,7 +108,22 @@ darkModeToggle.addEventListener('click', () => {
     timerModesButtons.forEach(btn => { btn.classList.remove('active') })
     focusButton.classList.add('active')
     updateTimerDisplay(focusTime)
-})
+}
+
+
+//------- Events of theme section -------//
+
+
+focusButton.addEventListener('click', focusButtonTheme)
+breakButton.addEventListener('click', breakButtonTheme)
+longBreakButton.addEventListener('click', longBreakButtonTheme)
+// Changing between dark and light mode
+darkModeToggle.addEventListener('click', darkModeTheme)
+
+
+//-----------------------------------------------------------------------------------//
+//----------------------------   Timers Section   -----------------------------------//
+
 
 // timers amount and turning into seconds
 let focusTime = 25
@@ -117,6 +151,8 @@ function focusTimer() {
     }
 }
 
+
+// Function that plays the timer on break mode
 function breakTimer() {
     if (playPauseButton.classList.contains('playing')) {
         clearInterval(timerInterval)
@@ -133,6 +169,8 @@ function breakTimer() {
     }
 }
 
+
+// Function that plays the timer on longBreak mode
 function longBreakTimer() {
     if (playPauseButton.classList.contains('playing')) {
         clearInterval(timerInterval)
@@ -148,6 +186,7 @@ function longBreakTimer() {
         updatePlayButton(false)
     }
 }
+
 
 // function that update the timer display (to be used in any mode)
 const updateTimerDisplay = time => {
@@ -194,6 +233,32 @@ const resetTimer = timer => {
 }
 
 
+// function to skip to the next mode
+const skipMode = () => {
+    let skipTo = null
+    timerModesButtons.forEach((button, i) => {
+        if (button.classList.contains('active')) {
+            skipTo = i + 1
+            button.classList.remove('active')
+        }
+    })
+    if (skipTo == 3) {
+        skipTo = 0
+    }
+    timerModesButtons.forEach((button, i) => {
+        if (skipTo == i) {
+            if (button.dataset.mode === 'focus') {
+                focusButtonTheme()
+            } else if (button.dataset.mode === 'break') {
+                breakButtonTheme()
+            } else if (button.dataset.mode === 'longBreak') {
+                longBreakButtonTheme()
+            }
+        }
+    })
+}
+
+
 // Giving a class to the button that is active in the moment 
 timerModesButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -201,6 +266,12 @@ timerModesButtons.forEach(button => {
         button.classList.add('active')
     })
 });
+
+
+//------- Events of timer section -------//
+
+
+skipButton.addEventListener('click', skipMode)
 
 
 // Configuring the correct timer to which mode
