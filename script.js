@@ -215,10 +215,10 @@ const updateTimerDisplay = time => {
 // function that update the play/pause button style (my goal is to use in any mode)
 const updatePlayButton = (condition) => {
     if (condition) {
-        playPauseButton.textContent = 'Play'
+        playPauseButton.textContent = 'PLAY'
         playPauseButton.classList.remove('button--playing')
     } else {
-        playPauseButton.textContent = 'Pause'
+        playPauseButton.textContent = 'PAUSE'
         playPauseButton.classList.add('button--playing')
     }
 }
