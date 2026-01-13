@@ -1,5 +1,8 @@
-//-----------------------------------------------------------------------------------//
-//----------------------------   Variables Section   --------------------------------//
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+//----------------------------------------------------------------------------------   Variables Section   -------------------------------------------------------------------------------//
+
+
+
 // Getting modes buttons
 const focusButton = document.querySelector('.js-focus-button')
 const breakButton = document.querySelector('.js-break-button')
@@ -20,8 +23,11 @@ const colorBackground = styles.getPropertyValue('--color-background')
 let timerInterval = null
 
 
-//-----------------------------------------------------------------------------------//
-//----------------------------   Theme Section   ------------------------------------//
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+//----------------------------------------------------------------------------------   Themes Section   ----------------------------------------------------------------------------------//
+
+
 
 // Changing the background color and the timer display value according to the mode
 function changeBackgroundColor(newColor) {
@@ -45,6 +51,7 @@ const focusButtonTheme = () => {
     updateTimerDisplay(focusTime)
     clearInterval(timerInterval)
     focusButton.classList.add('active')
+    updatePlayButton(true)
 }
 
 
@@ -64,6 +71,7 @@ const breakButtonTheme = () => {
     updateTimerDisplay(breakTime)
     clearInterval(timerInterval)
     breakButton.classList.add('active')
+    updatePlayButton(true)
 }
 
 
@@ -83,6 +91,7 @@ const longBreakButtonTheme = () => {
     updateTimerDisplay(longBreakTime)
     clearInterval(timerInterval)
     longBreakButton.classList.add('active')
+    updatePlayButton(true)
 }
 
 
@@ -121,8 +130,10 @@ longBreakButton.addEventListener('click', longBreakButtonTheme)
 darkModeToggle.addEventListener('click', darkModeTheme)
 
 
-//-----------------------------------------------------------------------------------//
-//----------------------------   Timers Section   -----------------------------------//
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+//----------------------------------------------------------------------------------   Timers Section   ----------------------------------------------------------------------------------//
+
 
 
 // timers amount and turning into seconds
@@ -256,6 +267,7 @@ const skipMode = () => {
             }
         }
     })
+    updatePlayButton(true)
 }
 
 
