@@ -142,6 +142,7 @@ darkModeToggle.addEventListener('click', darkModeTheme)
 let focusTime = 25
 let breakTime = 5
 let longBreakTime = 15
+let longBreakInterval = 6
 focusTime *= 60;
 breakTime *= 60;
 longBreakTime *= 60;
@@ -261,15 +262,24 @@ const skipMode = () => {
     timerModesButtons.forEach((button, i) => {
         if (skipTo == i) {
             if (button.dataset.mode === 'focus') {
+                longBreakInterval--
                 focusButtonTheme()
             } else if (button.dataset.mode === 'break') {
-                breakButtonTheme()
+                if (longBreakInterval == 0) {
+                    longBreakButtonTheme()
+                    longBreakInterval = 7
+                } else {
+                    longBreakInterval--
+                    breakButtonTheme()
+                }
             } else if (button.dataset.mode === 'longBreak') {
-                longBreakButtonTheme()
+                longBreakInterval--
+                focusButtonTheme()
             }
         }
     })
     updatePlayButton(true)
+    console.log(longBreakInterval)
 }
 
 
