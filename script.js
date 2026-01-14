@@ -20,6 +20,8 @@ const settingsForm = document.querySelector('.js-settings')
 const usersFocusTime = document.querySelector('.js-settings__numbers-input--focus')
 const usersBreakTime = document.querySelector('.js-settings__numbers-input--break')
 const usersLongBreakTime = document.querySelector('.js-settings__numbers-input--long-break')
+const usersLongBreakInterval = document.querySelector('.js-settings__options--long-break-interval')
+const showLongBreakInterval = document.querySelector('.js-settings__options--long-break-interval--text')
 // Getting CSS styles
 const rootElement = document.documentElement;
 const styles = getComputedStyle(rootElement);
@@ -275,7 +277,7 @@ const skipMode = () => {
             } else if (button.dataset.mode === 'break') {
                 if (longBreakInterval == 0) {
                     longBreakButtonTheme()
-                    longBreakInterval = 7
+                    longBreakInterval = usersLongBreakInterval.value == '' ? 7 : (usersLongBreakInterval.value * 2) + 1
                 } else {
                     longBreakInterval--
                     breakButtonTheme()
@@ -372,6 +374,19 @@ const changeLongBreakTime = () => {
 
 
 
+const changeLongBreakInterval = () => {
+    longBreakInterval = usersLongBreakInterval.value * 2
+    showLongBreakInterval.innerHTML = String(usersLongBreakInterval.value)
+}
+
+
+
+
+
+
+
+
+
 settingsButton.addEventListener('click', showSettingsForm)
 usersFocusTime.addEventListener('change', changeFocusTime)
 usersBreakTime.addEventListener('change', changeBreakTime)
@@ -381,3 +396,4 @@ mainContainer.addEventListener('click', (event) => {
         showSettingsForm()
     }
 })
+usersLongBreakInterval.addEventListener('change', changeLongBreakInterval)
