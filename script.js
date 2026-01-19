@@ -22,8 +22,11 @@ const usersBreakTime = document.querySelector('.js-settings__numbers-input--brea
 const usersLongBreakTime = document.querySelector('.js-settings__numbers-input--long-break')
 const usersLongBreakInterval = document.querySelector('.js-settings__options--long-break-interval')
 const showLongBreakInterval = document.querySelector('.js-settings__options--long-break-interval--text')
-const breaksAutoStartInput = document.querySelector('.js-settings__options--auto-starts-input')
-const focusAutoStartInput = document.querySelector('.js-settings__options--auto-starts-input')
+const breaksAutoStartInput = document.querySelector('.js-settings__options--breaks-auto-starts-input')
+const focusAutoStartInput = document.querySelector('.js-settings__options--focus-auto-start-input')
+const soundNotificationInput = document.querySelector('.js-settings__notifications--sound-switch-input')
+const soundNotification = document.getElementById('sound-notification')
+const popUpInput = document.querySelector('.js-settings__notifications--pop-up-switch-input')
 // Getting CSS styles
 const rootElement = document.documentElement;
 const styles = getComputedStyle(rootElement);
@@ -182,6 +185,8 @@ function tick() {
     // if the time runs out, clear the interval and skip to the next mode.
     if (timeLeft < 0) {
         clearInterval(timerInterval);
+        playSoundNotification(soundNotificationOptions);
+        showPopUp(popUpOptions)
         skipMode(breaksAutoStart, focusAutoStart);
         return;
     }
@@ -335,8 +340,8 @@ timerModesButtons.forEach(button => {
 
 let breaksAutoStart = 'off'
 let focusAutoStart = 'off'
-
-
+let soundNotificationOptions = 'off'
+let popUpOptions = 'off'
 
 
 
@@ -408,6 +413,37 @@ const changeFocusAutoStart = () => {
 
 
 
+const playSoundNotification = verification => {
+    if (verification == 'on') {
+        soundNotification.currentTime = 0;
+        soundNotification.play();
+    }
+}
+
+
+
+const changeSoundNotificationOptions = () => {
+    soundNotificationOptions = soundNotificationOptions == 'on' ? 'off' : 'on'
+}
+
+
+
+const showPopUp = verification => {
+    if (verification == 'on') {
+        alert('Time Finished')
+    }
+}
+
+
+
+
+const changePopUpOptions = () => {
+    popUpOptions = popUpOptions == 'on' ? 'off' : 'on'
+}
+
+
+
+
 settingsButton.addEventListener('click', showSettingsForm)
 usersFocusTime.addEventListener('change', changeFocusTime)
 usersBreakTime.addEventListener('change', changeBreakTime)
@@ -420,3 +456,5 @@ mainContainer.addEventListener('click', (event) => {
 usersLongBreakInterval.addEventListener('change', changeLongBreakInterval)
 breaksAutoStartInput.addEventListener('change', changeBreaksAutoStart)
 focusAutoStartInput.addEventListener('change', changeFocusAutoStart)
+soundNotificationInput.addEventListener('change', changeSoundNotificationOptions)
+popUpInput.addEventListener('change', changePopUpOptions)
