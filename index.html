@@ -1,231 +1,320 @@
 <!DOCTYPE html>
-<html lang="en"> <!-- Set to English as the main content language -->
-
+<html lang="en">
 
 <head>
+    <!-- Standard meta tags for character set and viewport -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Google Fonts for typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap"
         rel="stylesheet">
+
+    <!-- Google Material Symbols for icons -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
-    <link rel="stylesheet" href="style.css">
-
+    <!-- Page Title and Favicon -->
     <title>Focus Sprint</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+
+    <!-- Link to the external stylesheet -->
+    <link rel="stylesheet" href="style.css">
 </head>
-
-
 
 <body class="body">
 
-
+    <!-- Main container for the entire application -->
     <section class="main-container js-main-container dark-mode">
 
+        <!-- Wrapper for the main app view (timer, tasks, etc.) -->
+        <div class="app-wrapper">
 
-        <!-- header block -->
-        <header class="header">
-            <span class="header__brand">Focus Sprint</span>
-            <div class="header__controls">
-                <button class="button button-icon js-dark-mode-toggle" aria-label="Toggle dark mode">
-                    <span class="material-symbols-outlined">bedtime</span>
-                </button>
-                <button class="button button-icon js-settings-button" aria-label="Settings">
-                    <span class="material-symbols-outlined">settings</span>
-                </button>
-            </div>
-        </header>
+            <!-- Header Section -->
+            <header class="header">
+                <!-- App Logo (inline SVG for dynamic coloring) -->
+                <a href="#" class="header__brand-link" aria-label="Focus Sprint Home">
+                    <svg class="header__brand-logo" viewBox="0 0 200 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M34.1667 25C34.1667 30.0577 30.0577 34.1667 25 34.1667C19.9423 34.1667 15.8333 30.0577 15.8333 25C15.8333 19.9423 19.9423 15.8333 25 15.8333C30.0577 15.8333 32.7937 19.1413 33.75 22.5"
+                            stroke="#00C896" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M25 15.8333L25 10.8333" stroke="#00C896" stroke-width="3" stroke-linecap="round" />
+                        <text x="50" y="32" font-family="Inter, sans-serif" font-size="22" font-weight="600"
+                            fill="currentColor">Focus Sprint</text>
+                    </svg>
+                </a>
 
-
-        <!-- Main block with timer and tasks sections -->
-        <main>
-
-
-            <!-- Timer Section -->
-            <section class="timer">
-                <!-- Div for clock animation -->
-                <div class="timer__clock"></div>
-                <!-- Div for the timer modes -->
-                <div class="timer__modes">
-                    <button class="button button--time-mode js-focus-button active" data-mode="focus">Focus
-                        Time</button>
-                    <button class="button button--time-mode js-break-button" data-mode="break">Break</button>
-                    <button class="button button--time-mode js-long-break-button" data-mode="longBreak">Long
-                        break</button>
-                </div>
-                <!-- Stopwatch -->
-                <p class="timer__display js-timer-display">25:00</p>
-
-                <!-- Wrapper for the timer control buttons -->
-                <div class="timer__controls">
-                    <!-- Reset button -->
-                    <button class="button button--secondary js-reset-button" aria-label="Reset timer">
-                        <span class="material-symbols-outlined">history</span>
+                <!-- Header controls for language, theme, and settings -->
+                <div class="header__controls">
+                    <!-- Language selection button and menu -->
+                    <button class="button button-icon js-language-button" aria-label="Change language">
+                        <span class="material-symbols-outlined">language</span>
                     </button>
-                    <!-- Play/Stop button -->
-                    <button class="button button--primary js-play-pause-button">PLAY</button>
-                    <!-- Skip button -->
-                    <button class="button button--secondary js-skip-button" aria-label="Skip to next cycle">
-                        <span class="material-symbols-outlined">skip_next</span>
-                    </button>
-                </div>
-            </section>
-
-
-            <!-- Tasks section -->
-            <section class="tasks" aria-labelledby="tasks-heading">
-                <div class="tasks__header">
-                    <h2 class="tasks__title" id="tasks-heading">Tasks</h2>
-                    <button class="button button--tasks__options js-task-options-button" aria-label="More task options">
-                        <span class="material-symbols-outlined">more_vert</span>
-                    </button>
-                    <section class="settings tasks-settings js-task-settings">
-                        <div
-                            class="settings__options settings__options--1-line tasks-settings__options js-tasks-settings__options--delete-all-tasks-button">
-                            <span class="material-symbols-outlined">
-                                delete
-                            </span>
-                            <p>Delete All Tasks</p>
+                    <div class="language-menu js-language-menu">
+                        <div class="language-option js-language-option" data-lang="en">
+                            <span class="language-flag">🇺🇸</span> EN
+                            <span class="material-symbols-outlined language-check">check</span>
                         </div>
-                        <div
-                            class="settings__options settings__options--1-line tasks-settings__options js-tasks-settings__options--delete-completed-tasks-button">
-                            <span class="material-symbols-outlined">
-                                delete
-                            </span>
-                            <p>Delete Completed Tasks</p>
+                        <div class="language-option js-language-option" data-lang="pt-BR">
+                            <span class="language-flag">🇧🇷</span> PT-BR
+                            <span class="material-symbols-outlined language-check">check</span>
                         </div>
-                        <div
-                            class="settings__options settings__options--1-line tasks-settings__options js-tasks-settings__options--toggle-completed-tasks-button">
-                            <span class="material-symbols-outlined">
-                                disabled_visible
-                            </span>
-                            <p>Hide Completed Tasks</p>
-                        </div>
-                    </section>
-                </div>
-                <div class="tasks__display">
-                    <!-- Button to add a task -->
-                    <button class="button button--tasks__add js-add-task-button">
-                        <span class="material-symbols-outlined">
-                            add
-                        </span>
-                        Add Task
-                    </button>
-
-
-
-                    <div class="tasks__display-create js-tasks__display-create">
-                        <input class="js-tasks__display-create--input" type="text"
-                            placeholder="What are you doing today?">
-                        <div class="tasks__display-create--buttons">
-                            <button
-                                class="tasks__display-create--buttons--save js-tasks__display-create--buttons--save">Save</button>
-                            <button
-                                class="tasks__display-create--buttons--cancel js-tasks__display-create--buttons--cancel">Cancel</button>
+                        <div class="language-option js-language-option" data-lang="es">
+                            <span class="language-flag">🇪🇸</span> ES
+                            <span class="material-symbols-outlined language-check">check</span>
                         </div>
                     </div>
-
-
-                    <!-- Will show the tasks here -->
-
-
+                    <!-- Dark mode toggle button -->
+                    <button class="button button-icon js-dark-mode-toggle" aria-label="Toggle dark mode">
+                        <span class="material-symbols-outlined">bedtime</span>
+                    </button>
+                    <!-- Settings button -->
+                    <button class="button button-icon js-settings-button" aria-label="Settings">
+                        <span class="material-symbols-outlined">settings</span>
+                    </button>
                 </div>
-            </section>
-        </main>
+            </header>
 
+            <!-- Main content area -->
+            <main>
+                <!-- Timer Section -->
+                <section class="timer">
+                    <!-- Timer mode buttons (Focus, Break, Long Break) -->
+                    <div class="timer__modes">
+                        <button class="button button--time-mode js-focus-button active" data-mode="focus">Focus
+                            Time</button>
+                        <button class="button button--time-mode js-break-button" data-mode="break">Break</button>
+                        <button class="button button--time-mode js-long-break-button" data-mode="longBreak">Long
+                            break</button>
+                    </div>
 
-        <!-- Settings Section -->
-        <section class="settings js-settings" aria-labelledby="settings">
+                    <!-- Visual indicator for Pomodoro cycles -->
+                    <div class="cycle-indicator js-cycle-indicator"></div>
+
+                    <!-- Circular progress bar and time display -->
+                    <div class="timer__clock">
+                        <svg class="progress-ring" width="clamp(300px, 40vw, 400px)" height="clamp(300px, 40vw, 400px)">
+                            <circle class="progress-ring__background" cx="clamp(150px, 20vw, 200px)"
+                                cy="clamp(150px, 20vw, 200px)" r="clamp(140px, 19vw, 190px)" />
+                            <circle class="progress-ring__progress js-progress-ring" cx="clamp(150px, 20vw, 200px)"
+                                cy="clamp(150px, 20vw, 200px)" r="clamp(140px, 19vw, 190px)" />
+                        </svg>
+                        <p class="timer__display js-timer-display">25:00</p>
+                    </div>
+
+                    <!-- Timer control buttons (Reset, Play/Pause, Skip) -->
+                    <div class="timer__controls">
+                        <button class="button button--secondary js-reset-button" aria-label="Reset timer">
+                            <span class="material-symbols-outlined">history</span>
+                        </button>
+                        <button class="button button--primary js-play-pause-button">PLAY</button>
+                        <button class="button button--secondary js-skip-button" aria-label="Skip to next cycle">
+                            <span class="material-symbols-outlined">skip_next</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Tasks Section -->
+                <section class="tasks" aria-labelledby="tasks-heading">
+                    <!-- Tasks header with title and options menu -->
+                    <div class="tasks__header">
+                        <h2 class="tasks__title" id="tasks-heading">Tasks</h2>
+                        <button class="button button--tasks__options js-task-options-button"
+                            aria-label="More task options">
+                            <span class="material-symbols-outlined">more_vert</span>
+                        </button>
+                        <!-- Hidden menu for task-wide actions -->
+                        <section class="settings tasks-settings js-task-settings" hidden>
+                            <div
+                                class="settings__options tasks-settings__options js-tasks-settings__options--delete-all-tasks-button">
+                                <span class="material-symbols-outlined">delete</span>
+                                <p>Delete All Tasks</p>
+                            </div>
+                            <div
+                                class="settings__options tasks-settings__options js-tasks-settings__options--delete-completed-tasks-button">
+                                <span class="material-symbols-outlined">delete</span>
+                                <p>Delete Completed Tasks</p>
+                            </div>
+                            <div
+                                class="settings__options tasks-settings__options js-tasks-settings__options--toggle-completed-tasks-button">
+                                <span class="material-symbols-outlined">disabled_visible</span>
+                                <p>Hide Completed Tasks</p>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Container where tasks will be displayed -->
+                    <div class="tasks__display">
+                        <button class="button button--tasks__add js-add-task-button">
+                            <span class="material-symbols-outlined">add</span> Add Task
+                        </button>
+                        <!-- Hidden form to create a new task -->
+                        <div class="tasks__display-create js-tasks__display-create" hidden>
+                            <input class="js-tasks__display-create--input" type="text"
+                                placeholder="What are you doing today?">
+                            <div class="tasks__display-create--buttons">
+                                <button
+                                    class="tasks__display-create--buttons--save js-tasks__display-create--buttons--save">Save</button>
+                                <button
+                                    class="tasks__display-create--buttons--cancel js-tasks__display-create--buttons--cancel">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Scroll down indicator -->
+            <a href="#info-section" class="scroll-down-indicator" aria-label="Scroll down to learn more">
+                <span class="material-symbols-outlined">expand_more</span>
+            </a>
+        </div>
+
+        <!-- Settings Panel (hidden by default) -->
+        <section class="settings js-settings" aria-labelledby="settings" hidden>
             <h2>Settings</h2>
+            <!-- General settings section -->
             <div class="settings__section">
-                <!-- Breaks Auto Start -->
                 <div class="settings__options settings__options--1-line">
                     <p>Auto Start Breaks</p>
-                    <label class="settings__options--switch">
-                        <input type="checkbox"
-                            class="settings__options--switch-input js-settings__options--breaks-auto-starts-input" />
-                        <span class="settings__options--switch-slider"></span>
-                    </label>
+                    <label class="settings__options--switch"><input type="checkbox"
+                            class="settings__options--switch-input js-settings__options--breaks-auto-starts-input" /><span
+                            class="settings__options--switch-slider"></span></label>
                 </div>
-                <!-- Focus Auto Start -->
                 <div class="settings__options settings__options--1-line">
                     <p>Auto Start Focus</p>
-                    <label class="settings__options--switch">
-                        <input type="checkbox"
-                            class="settings__options--switch-input js-settings__options--focus-auto-start-input" />
-                        <span class="settings__options--switch-slider"></span>
-                    </label>
+                    <label class="settings__options--switch"><input type="checkbox"
+                            class="settings__options--switch-input js-settings__options--focus-auto-start-input" /><span
+                            class="settings__options--switch-slider"></span></label>
                 </div>
-                <!-- Long Break Interval -->
                 <div class="settings__options settings__options--1-line">
                     <p>Long Break Every <span class="js-settings__options--long-break-interval--text">3</span> Breaks
                     </p>
                     <input class="settings__numbers-input js-settings__options--long-break-interval" type="number"
-                        placeholder="3">
+                        placeholder="3" min="1">
                 </div>
             </div>
-            <!-- Timers Change -->
+            <!-- Timer duration settings -->
             <div class="settings__section">
                 <p>TIMERS</p>
                 <div class="settings__timers--inputs">
-                    <label class="settings__timers--labels">
-                        Focus
-                        <input class="settings__numbers-input js-settings__numbers-input--focus" type="number"
-                            placeholder="25">
-                    </label>
-                    <label class="settings__timers--labels">
-                        Break
-                        <input class="settings__numbers-input js-settings__numbers-input--break" type="number"
-                            placeholder="5">
-                    </label>
-                    <label class="settings__timers--labels">
-                        Long Break
-                        <input class="settings__numbers-input js-settings__numbers-input--long-break" type="number"
-                            placeholder="15">
-                    </label>
+                    <label class="settings__timers--labels">Focus <input
+                            class="settings__numbers-input js-settings__numbers-input--focus" type="number"
+                            placeholder="25" min="1"></label>
+                    <label class="settings__timers--labels">Break <input
+                            class="settings__numbers-input js-settings__numbers-input--break" type="number"
+                            placeholder="5" min="1"></label>
+                    <label class="settings__timers--labels">Long Break <input
+                            class="settings__numbers-input js-settings__numbers-input--long-break" type="number"
+                            placeholder="15" min="1"></label>
                 </div>
             </div>
-            <!-- Notifications Settings -->
+            <!-- Notification settings -->
             <div class="settings__section">
                 <p>NOTIFICATIONS</p>
-                <!-- Sound Notification -->
                 <div class="settings__options settings__options--1-line">
                     <p class="settings__notifications--text">Sound Alarm When Timer is Finished</p>
-                    <label class="settings__options--switch">
-                        <input type="checkbox"
-                            class="settings__options--switch-input js-settings__notifications--sound-switch-input" />
-                        <span class="settings__options--switch-slider"></span>
-                    </label>
+                    <label class="settings__options--switch"><input type="checkbox"
+                            class="settings__options--switch-input js-settings__notifications--sound-switch-input" /><span
+                            class="settings__options--switch-slider"></span></label>
                 </div>
-                <!-- Pop Up Notification -->
                 <div class="settings__options settings__options--1-line">
                     <p class="settings__notifications--text">Pop Up When Timer is Finished</p>
-                    <label class="settings__options--switch">
-                        <input type="checkbox"
-                            class="settings__options--switch-input js-settings__notifications--pop-up-switch-input" />
-                        <span class="settings__options--switch-slider"></span>
+                    <label class="settings__options--switch"><input type="checkbox"
+                            class="settings__options--switch-input js-settings__notifications--pop-up-switch-input" /><span
+                            class="settings__options--switch-slider"></span></label>
                 </div>
             </div>
         </section>
 
-
-
-        <section class="settings tasks-settings js-task-settings">
-            <h2>Task Settings</h2>
+        <!-- Informational Section about the Pomodoro Technique -->
+        <section class="info-section" id="info-section">
+            <h2 class="info-section__title">Master Your Focus with the Pomodoro Technique</h2>
+            <!-- Info Card: What is Pomodoro? -->
+            <div class="info-card">
+                <h3 class="info-card__title"><span class="material-symbols-outlined">help_outline</span> What is the
+                    Pomodoro Technique?</h3>
+                <p class="info-card__text">The Pomodoro Technique is a time management method developed by Francesco
+                    Cirillo...</p>
+            </div>
+            <!-- Info Card: How it works -->
+            <div class="info-card">
+                <h3 class="info-card__title"><span class="material-symbols-outlined">stacks</span> How It Works</h3>
+                <ol class="info-card__list">
+                    <li><span>Decide on the task to be done.</span></li>
+                    <li><span>Set the pomodoro timer (typically for 25 minutes).</span></li>
+                    <li><span>Work on the task until the timer rings.</span></li>
+                    <li><span>Take a short break (3-5 minutes).</span></li>
+                    <li><span>After four pomodoros, take a longer break (15-30 minutes).</span></li>
+                </ol>
+            </div>
+            <!-- Info Card: Benefits -->
+            <div class="info-card">
+                <h3 class="info-card__title"><span class="material-symbols-outlined">thumb_up</span> Why Use It?</h3>
+                <ul class="info-card__list info-card__list--benefits">
+                    <li><span class="material-symbols-outlined">neurology</span>
+                        <div><strong>Improves Focus:</strong> ...</div>
+                    </li>
+                    <li><span class="material-symbols-outlined">self_improvement</span>
+                        <div><strong>Reduces Burnout:</strong> ...</div>
+                    </li>
+                    <li><span class="material-symbols-outlined">insights</span>
+                        <div><strong>Increases Awareness:</strong> ...</div>
+                    </li>
+                    <li><span class="material-symbols-outlined">psychology</span>
+                        <div><strong>Reduces Anxiety:</strong> ...</div>
+                    </li>
+                </ul>
+            </div>
+            <!-- Info Card: Pro Tips -->
+            <div class="info-card">
+                <h3 class="info-card__title"><span class="material-symbols-outlined">school</span> Pro Tips for Success
+                </h3>
+                <ul class="info-card__list">
+                    <li><strong>Protect Your Pomodoro:</strong> ...</li>
+                    <li><strong>Use Breaks Wisely:</strong> ...</li>
+                    <li><strong>Adapt the Timings:</strong> ...</li>
+                    <li><strong>Combine with a To-Do List:</strong> ...</li>
+                </ul>
+            </div>
         </section>
+
+        <!-- Confirmation Modal (hidden by default) -->
+        <div class="modal-overlay js-modal-overlay">
+            <div class="modal">
+                <h3 class="modal__title js-modal-title">Confirm Action</h3>
+                <p class="modal__text js-modal-text">Are you sure?</p>
+                <div class="modal__actions">
+                    <button class="button modal__button modal__button--cancel js-modal-cancel">Cancel</button>
+                    <button class="button modal__button modal__button--confirm js-modal-confirm">Confirm</button>
+                </div>
+            </div>
+        </div>
     </section>
 
 
+    <!-- footer with licenses -->
+    <footer class="footer">
+        <p>
+            © 2026 Flávio Tomás Peña Villa —
+            <a href="https://github.com/FlavioTomas/Focus-Sprint-Pomodoro" target="_blank" rel="noopener noreferrer">
+                Source
+            </a>
+            ·
+            <a href="https://github.com/FlavioTomas/Focus-Sprint-Pomodoro/blob/main/LICENSE" target="_blank"
+                rel="noopener noreferrer">
+                MIT License
+            </a>
+        </p>
+    </footer>
 
-    <audio id="sound-notification" src="./asssets/notification-sound.mp3" preload="auto"></audio>
+    <!-- Audio element for sound notifications -->
+    <audio id="sound-notification" src="./assets/notification-sound.mp3" preload="auto"></audio>
+
+    <!-- Link to the main JavaScript file -->
     <script src="./script.js"></script>
 </body>
-
-
 
 </html>

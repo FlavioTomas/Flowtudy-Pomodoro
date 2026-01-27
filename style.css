@@ -1,5 +1,9 @@
+/* ==========================================================================
+   1. Root Variables
+   ========================================================================== */
+
 :root {
-    /* Colors - "Calm and Focus" Dark Mode Palette */
+    /* Color palette for the application */
     --color-background: #1E2A3A;
     --color-text-primary: #F0F0F0;
     --color-accent: #00C896;
@@ -7,13 +11,17 @@
     --color-surface: #162033;
     --color-muted: #A0AEC0;
 
-    /* Fonts */
+    /* Font families */
     --font-body: 'Inter', sans-serif;
     --font-display: 'Roboto Mono', monospace;
 
-    /* Spacing */
+    /* Global border radius */
     --border-radius: 6px;
 }
+
+/* ==========================================================================
+   2. Global Styles & Resets
+   ========================================================================== */
 
 * {
     margin: 0;
@@ -22,42 +30,89 @@
     transition: 0.5s ease-in-out;
 }
 
-html,
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     transition: 0.5s ease-in-out;
 }
 
+/* Use the 'hidden' attribute to semantically hide elements */
+[hidden] {
+    display: none !important;
+}
+
+/* ==========================================================================
+   3. Layout & Main Structure
+   ========================================================================== */
+
 .main-container {
-    height: 100vh;
+    min-height: 100vh;
     background-color: var(--color-background);
     color: var(--color-text-primary);
     font-family: var(--font-body);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+.app-wrapper {
+    min-height: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: clamp(24px, 5vw, 48px);
     gap: 10%;
+    position: relative;
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: clamp(70px, 80%, 600px);
+    gap: 5vh;
+}
+
+/* ==========================================================================
+   4. Header & Navigation
+   ========================================================================== */
 
 header {
     width: clamp(70px, 80%, 600px);
-
     display: inline-flex;
     justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
 }
 
-.header__brand {
-    font-size: clamp(1.35rem, 2vmin, 3rem);
-    font-weight: 600;
+.header__brand-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--color-text-primary);
+    /* Passes the current text color to the inline SVG */
+}
+
+.header__brand-logo {
+    height: 45px;
+    width: auto;
+    transition: none;
 }
 
 .header__controls {
     display: flex;
     align-items: center;
     gap: 12px;
+    position: relative;
 }
+
+/* ==========================================================================
+   5. Buttons & Controls
+   ========================================================================== */
 
 .button {
     background: none;
@@ -77,14 +132,40 @@ header {
     opacity: .4;
 }
 
-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: clamp(70px, 80%, 600px);
-    gap: 10vh;
+.button--primary {
+    background-color: var(--color-accent);
+    color: var(--color-background);
+    font-weight: 800;
+    font-size: 1.25rem;
+    padding: 20px 70px;
+    letter-spacing: 2px;
 }
+
+.button--playing {
+    background-color: var(--color-accent-hover);
+    transform: translateY(-0.7vh);
+}
+
+.button--primary:hover {
+    transform: translateY(-0.7vh);
+}
+
+.button--secondary {
+    transform: scale(1.25);
+}
+
+.button--secondary:hover {
+    opacity: .6;
+}
+
+.button--secondary:active {
+    transition: none;
+    opacity: .4;
+}
+
+/* ==========================================================================
+   6. Timer Section
+   ========================================================================== */
 
 .timer {
     display: flex;
@@ -112,10 +193,81 @@ main {
     background-color: var(--color-surface);
 }
 
+.button--time-mode.active {
+    background-color: var(--color-surface);
+    transform: translateY(-0.3vh);
+}
+
+/* Cycle Indicator styles */
+.cycle-indicator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: -25px;
+    margin-top: -15px;
+    height: 12px;
+}
+
+.cycle-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 2px solid var(--color-muted);
+    opacity: 0.6;
+    transition: background-color 0.4s ease, border-color 0.4s ease, opacity 0.4s ease;
+}
+
+.cycle-dot.completed {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    opacity: 1;
+}
+
+/* Timer clock display and progress ring */
+.timer__clock {
+    position: relative;
+    width: clamp(300px, 40vw, 400px);
+    height: clamp(300px, 40vw, 400px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .timer__display {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
     font-size: clamp(5rem, 8vw, 7rem);
     font-family: var(--font-display);
-    transition: 0.5s ease-in-out;
+}
+
+.progress-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.progress-ring__background,
+.progress-ring__progress {
+    fill: none;
+    stroke-width: 8;
+}
+
+.progress-ring__background {
+    stroke: var(--color-surface);
+}
+
+.progress-ring__progress {
+    stroke: var(--color-accent);
+    stroke-linecap: round;
+    transform-origin: center;
+    transform: rotate(-90deg);
+    transition: stroke-dashoffset 0.3s linear, stroke 0.5s ease-in-out;
 }
 
 .timer__controls {
@@ -123,37 +275,9 @@ main {
     gap: 20px;
 }
 
-.button--primary {
-    background-color: var(--color-accent);
-    color: var(--color-background);
-    font-weight: 800;
-    font-size: 1.25rem;
-    padding: 20px 70px;
-    transition: 0.5s;
-    letter-spacing: 2px;
-}
-
-.button--playing {
-    background-color: var(--color-accent-hover);
-    transform: translateY(-0.7vh);
-}
-
-.button--primary:hover {
-    transform: translateY(-0.7vh);
-}
-
-.button--secondary {
-    transform: scale(1.25);
-}
-
-.button--secondary:hover {
-    opacity: .6;
-}
-
-.button--secondary:active {
-    transition: none;
-    opacity: .4;
-}
+/* ==========================================================================
+   7. Tasks Section
+   ========================================================================== */
 
 .tasks {
     display: flex;
@@ -176,9 +300,11 @@ main {
     background-color: var(--color-surface);
 }
 
-.button--tasks__options:active {
-    transition: none;
-    transform: translateY(0.2vh);
+.tasks__display {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
 }
 
 .button--tasks__add {
@@ -196,21 +322,191 @@ main {
     background-color: var(--color-surface);
 }
 
-.tasks__display {
-    width: 100%;
+/* Task creation form */
+.tasks__display-create {
+    background-color: var(--color-surface);
     display: flex;
     flex-direction: column;
-    gap: 2vh;
+    align-items: baseline;
+    padding: 10px;
+    border-radius: var(--border-radius);
+    gap: 5px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 200ms ease, visibility 0s linear 200ms;
 }
 
-.active {
-    background-color: var(--color-surface);
-    transform: translateY(-0.3vh);
+.tasks__display-create:not([hidden]) {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity 200ms ease;
 }
 
-.settings {
+.tasks__display-create input {
     background-color: var(--color-surface);
-    height: 80%;
+    border: none;
+    width: 100%;
+    padding: 2px 4px;
+    color: var(--color-text-primary);
+}
+
+.tasks__display-create button {
+    border: none;
+    width: 100px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    height: 20px;
+    font-weight: 500;
+    transition: .3s;
+}
+
+.tasks__display-create--buttons {
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.tasks__display-create--buttons--save {
+    background-color: var(--color-accent);
+}
+
+.tasks__display-create--buttons--cancel {
+    background-color: var(--color-muted);
+}
+
+/* Individual task item styling */
+.task-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: var(--color-surface);
+    padding: 12px;
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--color-accent);
+    position: relative;
+}
+
+.task-item[draggable="true"] {
+    cursor: move;
+}
+
+.task-item.dragging {
+    opacity: 0.5;
+}
+
+.task-item__checkbox {
+    min-width: 18px;
+    height: 18px;
+    accent-color: var(--color-accent);
+    cursor: pointer;
+}
+
+.task-item__text {
+    flex-grow: 1;
+    overflow-wrap: break-word;
+    min-width: 0;
+}
+
+.task-item--completed .task-item__text {
+    text-decoration: line-through;
+    color: var(--color-muted);
+}
+
+/* Task options menu (Edit, Delete) */
+.task-item__options {
+    margin-left: auto;
+}
+
+.task-item__menu {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: #2a3b50;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 120px;
+    z-index: 10;
+    overflow: hidden;
+    display: none;
+}
+
+.task-item__menu.active {
+    display: block;
+}
+
+.task-item__menu-option {
+    padding: 10px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+
+.task-item__menu-option:hover {
+    background-color: var(--color-surface);
+}
+
+/* Task editing mode styles */
+.task-item--editing .task-item__text,
+.task-item--editing .task-item__checkbox,
+.task-item--editing .task-item__options {
+    display: none;
+}
+
+.task-item__edit-container {
+    display: none;
+    width: 100%;
+    gap: 8px;
+}
+
+.task-item--editing .task-item__edit-container {
+    display: flex;
+    align-items: center;
+}
+
+.task-item__edit-input {
+    flex-grow: 1;
+    background-color: var(--color-background);
+    border: 1px solid var(--color-muted);
+    color: var(--color-text-primary);
+    padding: 6px 8px;
+    border-radius: var(--border-radius);
+}
+
+.task-item__edit-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-primary);
+}
+
+@keyframes task-add-animation {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.task-item--new {
+    animation: task-add-animation 0.4s ease-out;
+}
+
+/* ==========================================================================
+   8. Panels & Modals (Settings, Menus, Confirmation)
+   ========================================================================== */
+
+/* General styles for pop-up panels */
+.settings,
+.tasks-settings {
+    background-color: var(--color-surface);
     width: clamp(70px, 70%, 600px);
     position: fixed;
     border-radius: var(--border-radius);
@@ -223,14 +519,18 @@ main {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: opacity 200ms ease, visibility 0s linear 200ms;
+    transition: opacity 200ms ease, transform 200ms ease, visibility 0s linear 200ms;
+    transform: translateY(-10px);
+    z-index: 100;
 }
 
-.settings.showing-settings {
+.settings:not([hidden]),
+.tasks-settings:not([hidden]) {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    transition: opacity 200ms ease, visibility 0s;
+    transform: translateY(0);
+    transition: opacity 200ms ease, transform 200ms ease;
 }
 
 .settings__section {
@@ -253,6 +553,7 @@ main {
     justify-content: space-between;
 }
 
+/* Toggle switch styles */
 .settings__options--switch {
     position: relative;
     display: inline-block;
@@ -298,6 +599,7 @@ input:checked+.settings__options--switch-slider:before {
     transform: translateX(26px);
 }
 
+/* Number input styles */
 .settings__numbers-input {
     width: 60px;
     height: 34px;
@@ -323,19 +625,22 @@ input:checked+.settings__options--switch-slider:before {
     max-width: 70%;
 }
 
+/* Specific styles for the task settings menu */
 .tasks__header .tasks-settings {
     height: auto;
     position: absolute;
-    bottom: 100%;
     margin-bottom: 8px;
     right: 0;
     width: auto;
-    top: auto;
+    top: 100%;
     gap: 0;
     padding: 0;
+    z-index: 50;
+    transform: translateY(0);
 }
 
 .tasks-settings__options {
+    display: inline-flex;
     width: 100%;
     gap: 5px;
     cursor: pointer;
@@ -348,177 +653,305 @@ input:checked+.settings__options--switch-slider:before {
     background: rgb(30, 42, 58, 0.8);
 }
 
-.tasks__display-create {
-    background-color: var(--color-surface);
-    display: flex;
-    flex-direction: column;
-    align-items: baseline;
-    padding: 10px;
-    border-radius: var(--border-radius);
-    gap: 5px;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 200ms ease, visibility 0s linear 200ms;
-}
-
-.tasks__display-create.showing-settings {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transition: opacity 200ms ease, visibility 0s;
-}
-
-
-.tasks__display-create input{
-    background-color: var(--color-surface); 
-    border: none;
-    width: 100%;
-    padding: 2px 4px;
-    color: var(--color-text-primary);
-}
-
-.tasks__display-create button{
-    border: none;
-    width: 100px;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    height: 20px;
-    font-weight: 500;
-    transition: .3s;
-}
-
-.tasks__display-create--buttons {
-    display: inline-flex;
-    justify-content: space-between;
-    width: 100%;
-}
-
-
-.tasks__display-create--buttons--save {
-    background-color: var(--color-accent);
-}
-
-.tasks__display-create--buttons--cancel {
-    background-color: var(--color-muted);
-}
-
-.tasks__display-create button:hover{
-    opacity: 0.7;
-}
-
-.task-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background-color: var(--color-surface);
-    padding: 12px;
-    border-radius: var(--border-radius);
-    border-left: 4px solid var(--color-accent);
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.task-item:hover {
-    background-color: #2a3b50; /* A slightly lighter surface color for hover */
-}
-
-.task-item__checkbox {
-    min-width: 18px; /* Use min-width to prevent shrinking */
-    height: 18px;
-    accent-color: var(--color-accent); /* Style the checkbox color */
-    cursor: pointer;
-}
-
-.task-item__text {
-    flex-grow: 1; /* Allows the text to take up available space */
-    transition: color 0.3s, text-decoration 0.3s;
-}
-
-.task-item--completed .task-item__text {
-    text-decoration: line-through;
-    color: var(--color-muted);
-}
-
-.task-item__options {
-    margin-left: auto; /* Pushes the options button to the far right */
-}
-
-/* Utility class to hide elements */
-.hidden {
-    display: none !important;
-}
-
-/* --- Styles for Task Options Menu and Edit Mode --- */
-
-/* Make the task item a positioning parent for the menu */
-.task-item {
-    position: relative;
-}
-
-/* The context menu that appears */
-.task-item__menu {
+/* Language Menu */
+.language-menu {
     position: absolute;
-    top: 40px; /* Position it below the three-dots button */
+    top: 100%;
     right: 0;
-    background-color: #2a3b50; /* A bit lighter than the surface */
+    background-color: var(--color-surface);
     border-radius: var(--border-radius);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 120px;
-    z-index: 10;
-    overflow: hidden; /* Ensures border-radius applies to children */
-    display: none; /* Hidden by default */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    width: 140px;
+    z-index: 1000;
+    overflow: hidden;
+    display: none;
+    margin-top: 8px;
 }
 
-/* Show the menu when the active class is added */
-.task-item__menu.active {
+.language-menu.active {
     display: block;
 }
 
-/* Style for each option in the menu */
-.task-item__menu-option {
-    padding: 10px 12px;
+.language-option {
+    padding: 12px 16px;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 0.9rem;
+    gap: 10px;
+    font-size: 0.95rem;
+    transition: background-color 0.2s;
+    position: relative;
 }
 
-.task-item__menu-option:hover {
-    background-color: var(--color-surface);
+.language-option:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Styles for the task when it's being edited */
-.task-item--editing .task-item__text,
-.task-item--editing .task-item__checkbox,
-.task-item--editing .task-item__options {
-    display: none; /* Hide the original text, checkbox, and options button */
+.language-flag {
+    font-size: 1.2rem;
 }
 
-.task-item__edit-container {
-    display: none; /* Hide the edit container by default */
+.language-check {
+    margin-left: auto;
+    font-size: 1rem;
+    opacity: 0;
+    color: var(--color-accent);
+}
+
+.language-option.active .language-check {
+    opacity: 1;
+}
+
+/* Confirmation Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    gap: 8px;
-}
-
-.task-item--editing .task-item__edit-container {
-    display: flex; /* Show the edit container when in editing mode */
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
     align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
 }
 
-.task-item__edit-input {
-    flex-grow: 1;
-    background-color: var(--color-background);
-    border: 1px solid var(--color-muted);
-    color: var(--color-text-primary);
-    padding: 6px 8px;
+.modal-overlay--visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease;
+}
+
+.modal {
+    background-color: var(--color-surface);
+    padding: 24px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    transform: scale(0.9);
+    opacity: 0;
+    transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28), opacity 0.3s ease;
+    transition-delay: 0.1s;
+}
+
+.modal-overlay--visible .modal {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.modal__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.modal__text {
+    font-size: 1rem;
+    color: var(--color-muted);
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+
+.modal__actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.modal__button {
+    padding: 10px 24px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    border: none;
     border-radius: var(--border-radius);
 }
 
-.task-item__edit-button {
-    background: none;
-    border: none;
-    cursor: pointer;
+.modal__button--cancel {
+    background-color: var(--color-background);
     color: var(--color-text-primary);
+}
+
+.modal__button--confirm {
+    background-color: #e53e3e;
+    color: #fff;
+}
+
+/* ==========================================================================
+    9. Informational Section
+   ========================================================================== */
+
+.scroll-down-indicator {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--color-muted);
+    z-index: 5;
+    transition: color 0.3s;
+}
+
+.scroll-down-indicator:hover {
+    color: var(--color-text-primary);
+}
+
+.scroll-down-indicator span {
+    font-size: 3rem;
+}
+
+.info-section {
+    width: 100%;
+    padding: clamp(48px, 8vw, 80px) clamp(24px, 5vw, 48px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    background-color: var(--color-surface);
+}
+
+.info-section__title {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-accent);
+    text-align: center;
+    max-width: 600px;
+}
+
+.info-card {
+    background-color: var(--color-background);
+    border-radius: var(--border-radius);
+    padding: clamp(1.5rem, 3vw, 2rem);
+    width: clamp(70px, 90%, 700px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.info-card--visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.info-card__title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    margin-bottom: 1rem;
+    color: var(--color-text-primary);
+}
+
+.info-card__title .material-symbols-outlined {
+    color: var(--color-accent);
+}
+
+.info-card__text {
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    line-height: 1.6;
+    color: var(--color-muted);
+}
+
+/* List styles for info cards */
+.info-card__list {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.info-card__list li {
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    line-height: 1.6;
+    color: var(--color-muted);
+}
+
+ol.info-card__list {
+    counter-reset: item;
+}
+
+ol.info-card__list li {
+    padding-left: 40px;
+    position: relative;
+}
+
+ol.info-card__list li::before {
+    counter-increment: item;
+    content: counter(item);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+    color: var(--color-background);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+    font-family: var(--font-display);
+}
+
+ul.info-card__list li {
+    padding-left: 30px;
+    position: relative;
+}
+
+ul.info-card__list li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.info-card__list--benefits li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding-left: 0;
+}
+
+.info-card__list--benefits li::before {
+    content: none;
+}
+
+.info-card__list--benefits li .material-symbols-outlined {
+    color: var(--color-accent);
+    margin-top: 2px;
+}
+
+.info-card__list li strong {
+    color: var(--color-text-primary);
+}
+
+.footer {
+    width: 100%;
+    padding: 16px 24px;
+    text-align: center;
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    background-color: var(--color-background);
+}
+
+.footer a {
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
 }
