@@ -20,9 +20,7 @@ Um aplicativo **Pomodoro** completo para estudos e produtividade, com **gerencia
 
 > Observação: o GitHub nem sempre reproduz MP4 inline no README. O link acima normalmente abre/baixa o arquivo.
 
-### Screenshot (opcional)
-
-Coloque um print em `./assets/screenshot.png`:
+### Screenshot
 
 ![Focus Sprint Screenshot](./assets/screenshot.png)
 
@@ -53,7 +51,6 @@ Coloque um print em `./assets/screenshot.png`:
 - **Indicador de ciclos** (pontos que completam até o intervalo longo)
 - Controles: **Play/Pause**, **Reset**, **Skip**
 - Atualiza o **título da aba** com o tempo restante
-- **Restaura o timer** após recarregar a página (quando possível)
 
 ### Tarefas
 
@@ -194,8 +191,8 @@ O Focus Sprint salva:
 └── assets/
     ├── favicon.svg
     ├── notification-sound.mp3
-    ├── demo.mp4              (opcional)
-    └── screenshot.png        (opcional)
+    ├── demo.mp4              
+    └── screenshot.png        
 ```
 
 ---
