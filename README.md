@@ -172,10 +172,10 @@ No painel **Settings**, você pode:
 
 O Flowtudy salva:
 
-- **Configurações**: `focusSprintSettings`
-- **Tarefas**: `focusSprintTasks`
-- **Estado do timer**: `focusSprintTimerState`
-- **Idioma**: `focusSprintLanguage`
+- **Configurações**: `flowtudySettings`
+- **Tarefas**: `flowtudyTasks`
+- **Estado do timer**: `flowtudyTimerState`
+- **Idioma**: `flowtudyLanguage`
 
 ---
 
