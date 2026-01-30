@@ -787,6 +787,7 @@ input:checked+.settings__options--switch-slider:before {
 }
 
 .modal__title {
+    color: var(--color-text-primary);
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 8px;
@@ -1053,6 +1054,10 @@ ul.info-card__list li::before {
 .ios-modal__icon-example img[alt~="More"] {
     width: 18px;
     height: 18px;
+}
+
+.ios-modal__icon-img {
+    fill: var(--color-text-primary);
 }
 
 .instructions-block {
