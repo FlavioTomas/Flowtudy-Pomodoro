@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <!-- SEO Meta Tags -->
     <meta charset="UTF-8">
-    <title>Flowtudy | Free Pomodoro Timer & Task Manager for Deep Focus</title>
+    <title>Flowtudy | Temporizador Pomodoro Gratis y Gestor de Tareas</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Boost productivity with Flowtudy, a free Pomodoro timer with a task manager. Perfect for study, work, and achieving a state of flow. Simple and distraction-free.">
+        content="Mejora tu productividad con Flowtudy, un temporizador Pomodoro gratis con gestor de tareas. Ideal para estudiar, trabajar y alcanzar un estado de flow.">
 
     <!-- hreflang Tags for SEO -->
     <link rel="alternate" hreflang="en" href="https://www.flowtudy.com/" />
@@ -37,7 +37,7 @@
             <!-- Header Section -->
             <header class="header">
                 <!-- App Logo (inline SVG for dynamic coloring) -->
-                <a href="/" class="header__brand-link" aria-label="Flowtudy Home">
+                <a href="/es/" class="header__brand-link" aria-label="Página de Inicio de Flowtudy">
                     <svg class="header__brand-logo" viewBox="0 0 250 80" xmlns="http://www.w3.org/2000/svg"
                         aria-hidden="true">
                         <g class="logo-icon" transform="translate(0, 5)">
@@ -51,29 +51,30 @@
                 </a>
                 <!-- Header controls for language, theme, and settings -->
                 <div class="header__controls">
-                    <button class="button button-icon js-language-button" aria-label="Change language">
+                    <button class="button button-icon js-language-button" aria-label="Cambiar idioma">
                         <span class="material-symbols-outlined">language</span>
                     </button>
                     <div class="language-menu js-language-menu"></div>
-                    <button class="button button-icon js-dark-mode-toggle" aria-label="Toggle dark mode">
+                    <button class="button button-icon js-dark-mode-toggle" aria-label="Alternar modo oscuro">
                         <span class="material-symbols-outlined">bedtime</span>
                     </button>
-                    <button class="button button-icon js-settings-button" aria-label="Settings">
+                    <button class="button button-icon js-settings-button" aria-label="Configuración">
                         <span class="material-symbols-outlined">settings</span>
                     </button>
                 </div>
             </header>
             <!-- Main content area -->
             <main>
-                <h1 class="visually-hidden">Online Pomodoro Timer with Tasks for Focused Study and Work</h1>
+                <h1 class="visually-hidden">Temporizador Pomodoro en Línea con Tareas para Enfoque en Estudio y Trabajo
+                </h1>
                 <!-- Timer Section -->
                 <section class="timer">
                     <div class="timer__modes">
-                        <button class="button button--time-mode js-focus-button active" data-mode="focus">Focus
-                            Time</button>
-                        <button class="button button--time-mode js-break-button" data-mode="break">Break</button>
-                        <button class="button button--time-mode js-long-break-button" data-mode="longBreak">Long
-                            break</button>
+                        <button class="button button--time-mode js-focus-button active" data-mode="focus">Tiempo de
+                            Enfoque</button>
+                        <button class="button button--time-mode js-break-button" data-mode="break">Descanso</button>
+                        <button class="button button--time-mode js-long-break-button" data-mode="longBreak">Descanso
+                            Largo</button>
                     </div>
                     <div class="cycle-indicator js-cycle-indicator"></div>
                     <div class="timer__clock">
@@ -86,11 +87,11 @@
                         <p class="timer__display js-timer-display">25:00</p>
                     </div>
                     <div class="timer__controls">
-                        <button class="button button--secondary js-reset-button" aria-label="Reset timer">
+                        <button class="button button--secondary js-reset-button" aria-label="Reiniciar temporizador">
                             <span class="material-symbols-outlined">history</span>
                         </button>
-                        <button class="button button--primary js-play-pause-button">PLAY</button>
-                        <button class="button button--secondary js-skip-button" aria-label="Skip to next cycle">
+                        <button class="button button--primary js-play-pause-button">INICIAR</button>
+                        <button class="button button--secondary js-skip-button" aria-label="Saltar al siguiente ciclo">
                             <span class="material-symbols-outlined">skip_next</span>
                         </button>
                     </div>
@@ -98,97 +99,97 @@
                 <!-- Tasks Section -->
                 <section class="tasks" aria-labelledby="tasks-heading">
                     <div class="tasks__header">
-                        <h2 class="tasks__title" id="tasks-heading">Tasks</h2>
+                        <h2 class="tasks__title" id="tasks-heading">Tareas</h2>
                         <button class="button button--tasks__options js-task-options-button"
-                            aria-label="More task options">
+                            aria-label="Más opciones de tarea">
                             <span class="material-symbols-outlined">more_vert</span>
                         </button>
                         <section class="settings tasks-settings js-task-settings" hidden>
                             <div
                                 class="settings__options tasks-settings__options js-tasks-settings__options--delete-all-tasks-button">
                                 <span class="material-symbols-outlined">delete</span>
-                                <p>Delete All Tasks</p>
+                                <p>Eliminar Todas las Tareas</p>
                             </div>
                             <div
                                 class="settings__options tasks-settings__options js-tasks-settings__options--delete-completed-tasks-button">
                                 <span class="material-symbols-outlined">delete</span>
-                                <p>Delete Completed Tasks</p>
+                                <p>Eliminar Tareas Completadas</p>
                             </div>
                             <div
                                 class="settings__options tasks-settings__options js-tasks-settings__options--toggle-completed-tasks-button">
                                 <span class="material-symbols-outlined">disabled_visible</span>
-                                <p>Hide Completed Tasks</p>
+                                <p>Ocultar Tareas Completadas</p>
                             </div>
                         </section>
                     </div>
                     <div class="tasks__display">
                         <button class="button button--tasks__add js-add-task-button">
-                            <span class="material-symbols-outlined">add</span> Add Task
+                            <span class="material-symbols-outlined">add</span> Añadir Tarea
                         </button>
                         <div class="tasks__display-create js-tasks__display-create" hidden>
                             <input class="js-tasks__display-create--input" type="text"
-                                placeholder="What are you doing today?">
+                                placeholder="¿Qué vas a hacer hoy?">
                             <div class="tasks__display-create--buttons">
                                 <button
-                                    class="tasks__display-create--buttons--save js-tasks__display-create--buttons--save">Save</button>
+                                    class="tasks__display-create--buttons--save js-tasks__display-create--buttons--save">Guardar</button>
                                 <button
-                                    class="tasks__display-create--buttons--cancel js-tasks__display-create--buttons--cancel">Cancel</button>
+                                    class="tasks__display-create--buttons--cancel js-tasks__display-create--buttons--cancel">Cancelar</button>
                             </div>
                         </div>
                     </div>
                 </section>
             </main>
-            <a href="#info-section" class="scroll-down-indicator" aria-label="Scroll down to learn more">
+            <a href="#info-section" class="scroll-down-indicator" aria-label="Desplázate hacia abajo para aprender más">
                 <span class="material-symbols-outlined">expand_more</span>
             </a>
         </div>
         <!-- Settings Panel -->
         <section class="settings js-settings" aria-labelledby="settings-title" hidden>
-            <h2 id="settings-title">Settings</h2>
+            <h2 id="settings-title">Configuración</h2>
             <div class="settings__section">
                 <div class="settings__options settings__options--1-line">
-                    <p>Auto Start Breaks</p>
+                    <p>Iniciar Descansos Automáticamente</p>
                     <label class="settings__options--switch"><input type="checkbox"
                             class="settings__options--switch-input js-settings__options--breaks-auto-starts-input" /><span
                             class="settings__options--switch-slider"></span></label>
                 </div>
                 <div class="settings__options settings__options--1-line">
-                    <p>Auto Start Focus</p>
+                    <p>Iniciar Enfoque Automáticamente</p>
                     <label class="settings__options--switch"><input type="checkbox"
                             class="settings__options--switch-input js-settings__options--focus-auto-start-input" /><span
                             class="settings__options--switch-slider"></span></label>
                 </div>
                 <div class="settings__options settings__options--1-line">
-                    <p>Long Break Every <span class="js-settings__options--long-break-interval--text">3</span> Breaks
-                    </p>
+                    <p>Descanso Largo Cada <span class="js-settings__options--long-break-interval--text">3</span>
+                        Descansos</p>
                     <input class="settings__numbers-input js-settings__options--long-break-interval" type="number"
                         placeholder="3" min="1">
                 </div>
             </div>
             <div class="settings__section">
-                <p>TIMERS</p>
+                <p>TEMPORIZADORES</p>
                 <div class="settings__timers--inputs">
-                    <label class="settings__timers--labels">Focus <input
+                    <label class="settings__timers--labels">Enfoque <input
                             class="settings__numbers-input js-settings__numbers-input--focus" type="number"
                             placeholder="25" min="1"></label>
-                    <label class="settings__timers--labels">Break <input
+                    <label class="settings__timers--labels">Descanso <input
                             class="settings__numbers-input js-settings__numbers-input--break" type="number"
                             placeholder="5" min="1"></label>
-                    <label class="settings__timers--labels">Long Break <input
+                    <label class="settings__timers--labels">Descanso Largo <input
                             class="settings__numbers-input js-settings__numbers-input--long-break" type="number"
                             placeholder="15" min="1"></label>
                 </div>
             </div>
             <div class="settings__section">
-                <p>NOTIFICATIONS</p>
+                <p>NOTIFICACIONES</p>
                 <div class="settings__options settings__options--1-line">
-                    <p class="settings__notifications--text">Sound Alarm When Timer is Finished</p>
+                    <p class="settings__notifications--text">Sonar Alarma Cuando el Temporizador Termine</p>
                     <label class="settings__options--switch"><input type="checkbox"
                             class="settings__options--switch-input js-settings__notifications--sound-switch-input" /><span
                             class="settings__options--switch-slider"></span></label>
                 </div>
                 <div class="settings__options settings__options--1-line">
-                    <p class="settings__notifications--text">Pop Up When Timer is Finished</p>
+                    <p class="settings__notifications--text">Ventana Emergente Cuando el Temporizador Termine</p>
                     <label class="settings__options--switch"><input type="checkbox"
                             class="settings__options--switch-input js-settings__notifications--pop-up-switch-input" /><span
                             class="settings__options--switch-slider"></span></label>
@@ -197,78 +198,82 @@
         </section>
         <!-- Informational Section -->
         <section class="info-section" id="info-section">
-            <h2 class="info-section__title">What Is the Pomodoro Technique and How to Use It</h2>
+            <h2 class="info-section__title">Qué es la Técnica Pomodoro y Cómo se Utiliza</h2>
             <div class="info-card">
-                <h3 class="info-card__title"><span class="material-symbols-outlined">help_outline</span> What is the
-                    Pomodoro Technique?</h3>
-                <p class="info-card__text">The Pomodoro Technique is a time management method developed by Francesco
-                    Cirillo in the late 1980s. It uses a timer to break down work into intervals, traditionally 25
-                    minutes in length, separated by short breaks. Each interval is known as a 'pomodoro,' from the
-                    Italian word for 'tomato,' after the tomato-shaped kitchen timer that Cirillo used as a university
-                    student.</p>
+                <h3 class="info-card__title"><span class="material-symbols-outlined">help_outline</span> ¿Qué es la
+                    Técnica Pomodoro?</h3>
+                <p class="info-card__text">La Técnica Pomodoro es un método de gestión del tiempo desarrollado por
+                    Francesco Cirillo a finales de los años 1980. Utiliza un temporizador para dividir el trabajo en
+                    intervalos, tradicionalmente de 25 minutos, separados por breves descansos. Cada intervalo se conoce
+                    como 'pomodoro', de la palabra italiana para 'tomate', en referencia al temporizador de cocina en
+                    forma de tomate que Cirillo usaba como estudiante universitario.</p>
             </div>
             <div class="info-card">
-                <h3 class="info-card__title"><span class="material-symbols-outlined">stacks</span> How It Works</h3>
+                <h3 class="info-card__title"><span class="material-symbols-outlined">stacks</span> Cómo Funciona</h3>
                 <ol class="info-card__list">
-                    <li><span>Decide on the task to be done.</span></li>
-                    <li><span>Set the pomodoro timer (typically for 25 minutes).</span></li>
-                    <li><span>Work on the task until the timer rings.</span></li>
-                    <li><span>Take a short break (3-5 minutes).</span></li>
-                    <li><span>After four pomodoros, take a longer break (15-30 minutes).</span></li>
+                    <li><span>Decide la tarea a realizar.</span></li>
+                    <li><span>Configura el temporizador pomodoro (normalmente para 25 minutos).</span></li>
+                    <li><span>Trabaja en la tarea hasta que suene el temporizador.</span></li>
+                    <li><span>Toma un descanso corto (3-5 minutos).</span></li>
+                    <li><span>Después de cuatro pomodoros, toma un descanso más largo (15-30 minutos).</span></li>
                 </ol>
             </div>
             <div class="info-card">
-                <h3 class="info-card__title"><span class="material-symbols-outlined">thumb_up</span> Why Use It?</h3>
+                <h3 class="info-card__title"><span class="material-symbols-outlined">thumb_up</span> ¿Por qué Usarla?
+                </h3>
                 <ul class="info-card__list info-card__list--benefits">
                     <li><span class="material-symbols-outlined">neurology</span>
-                        <div><strong>Improves Focus:</strong> Helps resist self-interruptions and re-trains your brain
-                            to stay on task.</div>
+                        <div><strong>Mejora el Enfoque:</strong> Ayuda a resistir las autointerrupciones y reentrena tu
+                            cerebro para mantenerse en la tarea.</div>
                     </li>
                     <li><span class="material-symbols-outlined">self_improvement</span>
-                        <div><strong>Reduces Burnout:</strong> The frequent breaks are essential for mental agility and
-                            motivation.</div>
+                        <div><strong>Reduce el Agotamiento:</strong> Los descansos frecuentes son esenciales para la
+                            agilidad mental y la motivación.</div>
                     </li>
                     <li><span class="material-symbols-outlined">insights</span>
-                        <div><strong>Increases Awareness:</strong> You'll gain a clearer understanding of how long tasks
-                            actually take.</div>
+                        <div><strong>Aumenta la Conciencia:</strong> Obtendrás una comprensión más clara de cuánto
+                            tiempo realmente toman las tareas.</div>
                     </li>
                     <li><span class="material-symbols-outlined">psychology</span>
-                        <div><strong>Reduces Anxiety:</strong> By focusing on '25 minutes of work' instead of a huge
-                            project, tasks feel less daunting.</div>
+                        <div><strong>Reduce la Ansiedad:</strong> Al enfocarte en '25 minutos de trabajo' en lugar de un
+                            proyecto enorme, las tareas parecen menos abrumadoras.</div>
                     </li>
                 </ul>
             </div>
             <div class="info-card">
-                <h3 class="info-card__title"><span class="material-symbols-outlined">school</span> Pro Tips for Success
-                </h3>
+                <h3 class="info-card__title"><span class="material-symbols-outlined">school</span> Consejos
+                    Profesionales para el Éxito</h3>
                 <ul class="info-card__list">
-                    <li><strong>Protect Your Pomodoro:</strong> If you're interrupted during a focus session, either
-                        pause the timer or end the pomodoro. Avoid context switching.</li>
-                    <li><strong>Use Breaks Wisely:</strong> Don't do anything demanding during your break. Stretch, get
-                        water, or look out the window. Avoid checking email or social media.</li>
-                    <li><strong>Adapt the Timings:</strong> While 25/5 is the classic split, feel free to experiment.
-                        You might find 50/10 works better for you on certain tasks.</li>
-                    <li><strong>Combine with a To-Do List:</strong> Use your task list to decide what to work on during
-                        each pomodoro session for maximum clarity.</li>
+                    <li><strong>Protege Tu Pomodoro:</strong> Si te interrumpen durante una sesión de enfoque, pausa el
+                        temporizador o termina el pomodoro. Evita cambiar de contexto.</li>
+                    <li><strong>Usa los Descansos Sabiamente:</strong> No hagas nada exigente durante tu descanso.
+                        Estírate, toma agua o mira por la ventana. Evita revisar correo electrónico o redes sociales.
+                    </li>
+                    <li><strong>Adapta los Tiempos:</strong> Aunque 25/5 es la división clásica, siéntete libre de
+                        experimentar. Puedes encontrar que 50/10 funciona mejor para ti en ciertas tareas.</li>
+                    <li><strong>Combina con una Lista de Tareas:</strong> Usa tu lista de tareas para decidir en qué
+                        trabajar durante cada sesión pomodoro para máxima claridad.</li>
                 </ul>
             </div>
         </section>
         <!-- Confirmation Modal -->
         <div class="modal-overlay js-modal-overlay">
             <div class="modal">
-                <h3 class="modal__title js-modal-title">Confirm Action</h3>
-                <p class="modal__text js-modal-text">Are you sure?</p>
+                <h3 class="modal__title js-modal-title">Confirmar Acción</h3>
+                <p class="modal__text js-modal-text">¿Estás seguro?</p>
                 <div class="modal__actions">
-                    <button class="button modal__button modal__button--cancel js-modal-cancel">Cancel</button>
-                    <button class="button modal__button modal__button--confirm js-modal-confirm">Confirm</button>
+                    <button class="button modal__button modal__button--cancel js-modal-cancel">Cancelar</button>
+                    <button class="button modal__button modal__button--confirm js-modal-confirm">Confirmar</button>
                 </div>
             </div>
         </div>
     </section>
     <!-- Footer -->
     <footer class="footer">
-        <p>© 2026 Flowtudy — <a href="https://github.com/FlavioTomas/Flowtudy-Pomodoro" target="_blank" rel="noopener noreferrer">Source</a> · <a
-                href="https://github.com/FlavioTomas/Flowtudy-Pomodoro/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT License</a></p>
+        <p>© 2026 Flowtudy — <a href="https://github.com/FlavioTomas/Flowtudy-Pomodoro" target="_blank"
+                rel="noopener noreferrer">Código Fuente</a> · <a
+                href="https://github.com/FlavioTomas/Flowtudy-Pomodoro/blob/main/LICENSE" target="_blank"
+                rel="noopener noreferrer">Licencia MIT</a></p>
     </footer>
     <audio id="sound-notification" src="/assets/notification-sound.mp3" preload="auto"></audio>
     <script src="/script.js"></script>

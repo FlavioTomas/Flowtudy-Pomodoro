@@ -1,45 +1,43 @@
 /**
-     * @file script.js
-     * @description Main JavaScript file for the Focus Sprint Pomodoro application.
-     * @author Flávio Tomás Peña Villa
-     * @version 1.0
-     * @date Jan 2026
-     *
-     * -------------------------------------------------------------------------- *
-    *
-    * PROJECT: Focus Sprint
-    * DESCRIPTION: A fully-featured Pomodoro timer application built with vanilla
-    *              JavaScript, HTML, and CSS. It helps users manage their focus
-    *              and break sessions effectively.
-    *
-    * KEY FEATURES:
-    * - Customizable Pomodoro, Short Break, and Long Break timers.
-    * - Integrated task management with drag-and-drop reordering.
-    * - Light and Dark theme support.
-    * - Multi-language support (English, Portuguese, Spanish).
-    * - Visual cycle indicator for long breaks.
-    * - Sound and desktop notifications.
-    * - All settings and tasks saved to localStorage.
-    *
-    * -------------------------------------------------------------------------- *
-    *
-    * TABLE OF CONTENTS:
-    * 1. VARIABLE DECLARATIONS
-    * 2. TRANSLATIONS OBJECT
-    * 3. THEME & UI FUNCTIONS
-    * 4. TIMER LOGIC & STATE MANAGEMENT
-    * 5. SETTINGS PANEL & NOTIFICATIONS
-    * 6. TASKS SECTION LOGIC
-    * 7. LANGUAGE & TRANSLATION
-    * 8. INITIALIZATION ON PAGE LOAD
+ * @file script.js
+ * @description Main JavaScript file for the Flowtudy Pomodoro application.
+ * @author Flávio Tomás Peña Villa
+ * @version 2.2
+ *
+ * -------------------------------------------------------------------------- *
+ *
+ * PROJECT: Flowtudy
+ * DESCRIPTION: A multi-language Pomodoro timer with task management, built
+ *              with a multi-page architecture for optimal SEO and performance.
+ *
+ * KEY FEATURES:
+ * - Separate HTML files for each language (en, pt-BR, es).
+ * - JavaScript handles dynamic UI text and user interactions.
+ * - All settings and tasks are saved to localStorage.
+ *
+ * -------------------------------------------------------------------------- *
+ *
+ * TABLE OF CONTENTS:
+ * 1. VARIABLE DECLARATIONS
+ * 2. UI STRINGS OBJECT (for dynamic text)
+ * 3. THEME & UI FUNCTIONS
+ * 4. TIMER LOGIC & STATE MANAGEMENT
+ * 5. SETTINGS PANEL & NOTIFICATIONS
+ * 6. TASKS SECTION LOGIC
+ * 7. LANGUAGE & NAVIGATION
+ * 8. INITIALIZATION ON PAGE LOAD
  *
  */
+
+
+
 
 // ==========================================================================
 // 1. VARIABLE DECLARATIONS
 // ==========================================================================
-// Selects all necessary DOM elements for manipulation.
 
+
+// Selects all necessary DOM elements for manipulation.
 const focusButton = document.querySelector('.js-focus-button');
 const breakButton = document.querySelector('.js-break-button');
 const longBreakButton = document.querySelector('.js-long-break-button');
@@ -87,23 +85,71 @@ let timerInterval = null;
 const cycleIndicator = document.querySelector('.js-cycle-indicator');
 
 
-// ==========================================================================
-// 2. TRANSLATIONS OBJECT
-// ==========================================================================
-// Contains all text strings for different languages.
 
-const translations = {
-    "en": { "app_name": "Focus Sprint", "focus_time": "Focus Time", "break": "Break", "long_break": "Long break", "tasks": "Tasks", "add_task": "Add Task", "task_placeholder": "What are you doing today?", "save": "Save", "cancel": "Cancel", "delete_all_tasks": "Delete All Tasks", "delete_completed_tasks": "Delete Completed Tasks", "hide_completed_tasks": "Hide Completed Tasks", "show_completed_tasks": "Show Completed Tasks", "settings": "Settings", "auto_start_breaks": "Auto Start Breaks", "auto_start_focus": "Auto Start Focus", "long_break_interval": "Long Break Every", "breaks": "Breaks", "timers": "TIMERS", "focus": "Focus", "break_time": "Break", "long_break_time": "Long Break", "notifications": "NOTIFICATIONS", "sound_alarm": "Sound Alarm When Timer is Finished", "pop_up": "Pop Up When Timer is Finished", "play": "PLAY", "pause": "PAUSE", "reset": "Reset timer", "skip": "Skip to next cycle", "dark_mode": "Toggle dark mode", "settings_button": "Settings", "more_options": "More task options", "edit": "Edit", "delete": "Delete", "confirm_action": "Confirm Action", "confirm_delete_all": "Are you sure you want to delete ALL tasks? This cannot be undone.", "confirm_delete_completed": "Are you sure you want to delete all COMPLETED tasks?", "confirm_delete_single": "Are you sure you want to delete the task: \"{task}\"?", "modal_cancel": "Cancel", "modal_confirm": "Confirm", "info_title": "Master Your Focus with the Pomodoro Technique", "info_what_is": "What is the Pomodoro Technique?", "info_what_is_text": "The Pomodoro Technique is a time management method developed by Francesco Cirillo in the late 1980s. It uses a timer to break down work into intervals, traditionally 25 minutes in length, separated by short breaks. Each interval is known as a 'pomodoro,' from the Italian word for 'tomato,' after the tomato-shaped kitchen timer that Cirillo used as a university student.", "info_how_it_works": "How It Works", "info_steps": ["Decide on the task to be done.", "Set the pomodoro timer (typically for 25 minutes).", "Work on the task until the timer rings.", "Take a short break (3-5 minutes).", "After four pomodoros, take a longer break (15-30 minutes)."], "info_why_use": "Why Use It?", "info_benefits": [{ "icon": "neurology", "title": "Improves Focus:", "text": "Helps resist self-interruptions and re-trains your brain to stay on task." }, { "icon": "self_improvement", "title": "Reduces Burnout:", "text": "The frequent breaks are essential for mental agility and motivation." }, { "icon": "insights", "title": "Increases Awareness:", "text": "You'll gain a clearer understanding of how long tasks actually take." }, { "icon": "psychology", "title": "Reduces Anxiety:", "text": "By focusing on '25 minutes of work' instead of a huge project, tasks feel less daunting." }], "info_tips": "Pro Tips for Success", "info_tips_list": ["<strong>Protect Your Pomodoro:</strong> If you're interrupted during a focus session, either pause the timer or end the pomodoro. Avoid context switching.", "<strong>Use Breaks Wisely:</strong> Don't do anything demanding during your break. Stretch, get water, or look out the window. Avoid checking email or social media.", "<strong>Adapt the Timings:</strong> While 25/5 is the classic split, feel free to experiment. You might find 50/10 works better for you on certain tasks.", "<strong>Combine with a To-Do List:</strong> Use your task list to decide what to work on during each pomodoro session for maximum clarity."], "scroll_down": "Scroll down to learn more", "language": "Language" },
-    "pt-BR": { "app_name": "Focus Sprint", "focus_time": "Tempo de Foco", "break": "Intervalo", "long_break": "Intervalo Longo", "tasks": "Tarefas", "add_task": "Adicionar Tarefa", "task_placeholder": "O que você vai fazer hoje?", "save": "Salvar", "cancel": "Cancelar", "delete_all_tasks": "Excluir Todas as Tarefas", "delete_completed_tasks": "Excluir Tarefas Concluídas", "hide_completed_tasks": "Ocultar Tarefas Concluídas", "show_completed_tasks": "Mostrar Tarefas Concluídas", "settings": "Configurações", "auto_start_breaks": "Iniciar Intervalos Automaticamente", "auto_start_focus": "Iniciar Foco Automaticamente", "long_break_interval": "Intervalo Longo a Cada", "breaks": "Intervalos", "timers": "TEMPORIZADORES", "focus": "Foco", "break_time": "Intervalo", "long_break_time": "Intervalo Longo", "notifications": "NOTIFICAÇÕES", "sound_alarm": "Tocar Alarme Quando o Temporizador Terminar", "pop_up": "Pop-up Quando o Temporizador Terminar", "play": "INICIAR", "pause": "PAUSAR", "reset": "Reiniciar temporizador", "skip": "Pular para próximo ciclo", "dark_mode": "Alternar modo escuro", "settings_button": "Configurações", "more_options": "Mais opções de tarefa", "edit": "Editar", "delete": "Excluir", "confirm_action": "Confirmar Ação", "confirm_delete_all": "Tem certeza que deseja excluir TODAS as tarefas? Esta ação não pode ser desfeita.", "confirm_delete_completed": "Tem certeza que deseja excluir todas as tarefas CONCLUÍDAS?", "confirm_delete_single": "Tem certeza que deseja excluir a tarefa: \"{task}\"?", "modal_cancel": "Cancelar", "modal_confirm": "Confirmar", "info_title": "Domine Seu Foco com a Técnica Pomodoro", "info_what_is": "O que é a Técnica Pomodoro?", "info_what_is_text": "A Técnica Pomodoro é um método de gerenciamento de tempo desenvolvido por Francesco Cirillo no final dos anos 1980. Ela usa um temporizador para dividir o trabalho em intervalos, tradicionalmente de 25 minutos de duração, separados por pausas curtas. Cada intervalo é conhecido como um 'pomodoro', da palavra italiana para 'tomate', em referência ao temporizador de cozinha em forma de tomate que Cirillo usava quando era estudante universitário.", "info_how_it_works": "Como Funciona", "info_steps": ["Decida qual tarefa será realizada.", "Ajuste o temporizador pomodoro (normalmente para 25 minutos).", "Trabalhe na tarefa até o temporizador tocar.", "Faça uma pausa curta (3-5 minutos).", "Após quatro pomodoros, faça uma pausa mais longa (15-30 minutos)."], "info_why_use": "Por que Usar?", "info_benefits": [{ "icon": "neurology", "title": "Melhora o Foco:", "text": "Ajuda a resistir a autointerrupções e retreina seu cérebro para permanecer na tarefa." }, { "icon": "self_improvement", "title": "Reduz o Esgotamento:", "text": "As pausas frequentes são essenciais para agilidade mental e motivação." }, { "icon": "insights", "title": "Aumenta a Consciência:", "text": "Você terá uma compreensão mais clara de quanto tempo as tarefas realmente levam." }, { "icon": "psychology", "title": "Reduz a Ansiedade:", "text": "Ao focar em '25 minutos de trabalho' em vez de um projeto enorme, as tarefas parecem menos assustadoras." }], "info_tips": "Dicas Profissionais para o Sucesso", "info_tips_list": ["<strong>Proteja Seu Pomodoro:</strong> Se você for interrompido durante uma sessão de foco, pause o temporizador ou termine o pomodoro. Evite mudar de contexto.", "<strong>Use as Pausas com Sabedoria:</strong> Não faça nada exigente durante sua pausa. Alongue-se, beba água ou olhe pela janela. Evite verificar e-mail ou redes sociais.", "<strong>Adapte os Tempos:</strong> Embora 25/5 seja a divisão clássica, sinta-se à vontade para experimentar. Você pode descobrir que 50/10 funciona melhor para você em certas tarefas.", "<strong>Combine com uma Lista de Tarefas:</strong> Use sua lista de tarefas para decidir no que trabalhar durante cada sessão pomodoro para máxima clareza."], "scroll_down": "Role para baixo para aprender mais", "language": "Idioma" },
-    "es": { "app_name": "Focus Sprint", "focus_time": "Tiempo de Enfoque", "break": "Descanso", "long_break": "Descanso Largo", "tasks": "Tareas", "add_task": "Añadir Tarea", "task_placeholder": "¿Qué vas a hacer hoy?", "save": "Guardar", "cancel": "Cancelar", "delete_all_tasks": "Eliminar Todas las Tareas", "delete_completed_tasks": "Eliminar Tareas Completadas", "hide_completed_tasks": "Ocultar Tareas Completadas", "show_completed_tasks": "Mostrar Tareas Completadas", "settings": "Configuración", "auto_start_breaks": "Iniciar Descansos Automáticamente", "auto_start_focus": "Iniciar Enfoque Automáticamente", "long_break_interval": "Descanso Largo Cada", "breaks": "Descansos", "timers": "TEMPORIZADORES", "focus": "Enfoque", "break_time": "Descanso", "long_break_time": "Descanso Largo", "notifications": "NOTIFICACIONES", "sound_alarm": "Sonar Alarma Cuando el Temporizador Termine", "pop_up": "Ventana Emergente Cuando el Temporizador Termine", "play": "INICIAR", "pause": "PAUSAR", "reset": "Reiniciar temporizador", "skip": "Saltar al siguiente ciclo", "dark_mode": "Alternar modo oscuro", "settings_button": "Configuração", "more_options": "Más opciones de tarea", "edit": "Editar", "delete": "Eliminar", "confirm_action": "Confirmar Acción", "confirm_delete_all": "¿Estás seguro de que quieres eliminar TODAS las tareas? Esta acción no se puede deshacer.", "confirm_delete_completed": "¿Estás seguro de que quieres eliminar todas las tareas COMPLETADAS?", "confirm_delete_single": "¿Estás seguro de que quieres eliminar la tarea: \"{task}\"?", "modal_cancel": "Cancelar", "modal_confirm": "Confirmar", "info_title": "Domina Tu Enfoque con la Técnica Pomodoro", "info_what_is": "¿Qué es la Técnica Pomodoro?", "info_what_is_text": "La Técnica Pomodoro es un método de gestión del tiempo desarrollado por Francesco Cirillo a finales de los años 1980. Utiliza un temporizador para dividir el trabajo en intervalos, tradicionalmente de 25 minutos de duración, separados por breves descansos. Cada intervalo se conoce como un 'pomodoro', de la palabra italiana para 'tomate', en referencia al temporizador de cocina en forma de tomate que Cirillo usaba cuando era estudiante universitario.", "info_how_it_works": "Cómo Funciona", "info_steps": ["Decide la tarea a realizar.", "Configura el temporizador pomodoro (normalmente para 25 minutos).", "Trabaja en la tarea hasta que suene el temporizador.", "Toma un descanso corto (3-5 minutos).", "Después de cuatro pomodoros, toma un descanso más largo (15-30 minutos)."], "info_why_use": "¿Por qué Usarla?", "info_benefits": [{ "icon": "neurology", "title": "Mejora el Enfoque:", "text": "Ayuda a resistir las autointerrupciones y reentrena tu cerebro para mantenerse en la tarea." }, { "icon": "self_improvement", "title": "Reduz o Esgotamento:", "text": "Los descansos frequentes são essenciais para a agilidade mental e a motivação." }, { "icon": "insights", "title": "Aumenta la Conciencia:", "text": "Obtendrás una comprensión más clara de cuánto tiempo realmente toman las tareas." }, { "icon": "psychology", "title": "Reduce la Ansiedad:", "text": "Al enfocarte en '25 minutos de trabajo' en lugar de un proyecto enorme, las tareas parecen menos abrumadoras." }], "info_tips": "Consejos Profesionales para el Éxito", "info_tips_list": ["<strong>Protege Tu Pomodoro:</strong> Si te interrumpen durante una sesión de enfoque, pausa el temporizador o termina el pomodoro. Evita cambiar de contexto.", "<strong>Usa los Descansos Sabiamente:</strong> No hagas nada exigente durante tu descanso. Estírate, toma agua o mira por la ventana. Evita revisar correo electrónico o redes sociales.", "<strong>Adapta los Tiempos:</strong> Aunque 25/5 es la división clásica, siéntete libre de experimentar. Puedes encontrar que 50/10 funciona mejor para ti en ciertas tareas.", "<strong>Combina con una Lista de Tareas:</strong> Usa tu lista de tarefas para decidir en qué trabajar durante cada sesión pomodoro para máxima claridad."], "scroll_down": "Desplázate hacia abajo para aprender más", "language": "Idioma" }
+
+
+// ==========================================================================
+// 2. UI STRINGS OBJECT (for dynamic text)
+// ==========================================================================
+
+
+// Contains only text strings that are generated dynamically by JavaScript.
+const uiStrings = {
+    "en": {
+        "play": "PLAY",
+        "pause": "PAUSE",
+        "edit": "Edit",
+        "delete": "Delete",
+        "hide_completed_tasks": "Hide Completed Tasks",
+        "show_completed_tasks": "Show Completed Tasks",
+        "confirm_action": "Confirm Action",
+        "confirm_delete_all": "Are you sure you want to delete ALL tasks? This cannot be undone.",
+        "confirm_delete_completed": "Are you sure you want to delete all COMPLETED tasks?",
+        "confirm_delete_single": "Are you sure you want to delete the task: \"{task}\"?",
+        "modal_cancel": "Cancel",
+        "modal_confirm": "Confirm"
+    },
+    "pt-BR": {
+        "play": "INICIAR",
+        "pause": "PAUSAR",
+        "edit": "Editar",
+        "delete": "Excluir",
+        "hide_completed_tasks": "Ocultar Tarefas Concluídas",
+        "show_completed_tasks": "Mostrar Tarefas Concluídas",
+        "confirm_action": "Confirmar Ação",
+        "confirm_delete_all": "Tem certeza que deseja excluir TODAS as tarefas? Esta ação não pode ser desfeita.",
+        "confirm_delete_completed": "Tem certeza que deseja excluir todas as tarefas CONCLUÍDAS?",
+        "confirm_delete_single": "Tem certeza que deseja excluir a tarefa: \"{task}\"?",
+        "modal_cancel": "Cancelar",
+        "modal_confirm": "Confirmar"
+    },
+    "es": {
+        "play": "INICIAR",
+        "pause": "PAUSAR",
+        "edit": "Editar",
+        "delete": "Eliminar",
+        "hide_completed_tasks": "Ocultar Tareas Completadas",
+        "show_completed_tasks": "Mostrar Tareas Completadas",
+        "confirm_action": "Confirmar Acción",
+        "confirm_delete_all": "¿Estás seguro de que quieres eliminar TODAS las tareas? Esta acción no se puede deshacer.",
+        "confirm_delete_completed": "¿Estás seguro de que quieres eliminar todas las tareas COMPLETADAS?",
+        "confirm_delete_single": "¿Estás seguro de que quieres eliminar la tarea: \"{task}\"?",
+        "modal_cancel": "Cancelar",
+        "modal_confirm": "Confirmar"
+    }
 };
+
+
 
 
 // ==========================================================================
 // 3. THEME & UI FUNCTIONS
 // ==========================================================================
 
-// Applies theme colors based on the current mode (focus, break, etc.).
+
+/**
+ * Applies theme colors based on the current timer mode (focus, break, etc.).
+ */
 const applyTheme = (mode) => {
     const isDarkMode = mainContainer.classList.contains('dark-mode');
     const themes = {
@@ -118,7 +164,9 @@ const applyTheme = (mode) => {
 
 
 
-// Toggles between dark and light mode.
+/**
+ * Toggles between dark and light mode and saves the preference.
+ */
 const darkModeTheme = () => {
     mainContainer.classList.toggle('dark-mode');
     rootElement.style.setProperty('--color-text-primary', mainContainer.classList.contains('dark-mode') ? '#F0F0F0' : '#1f1f1fff');
@@ -126,20 +174,32 @@ const darkModeTheme = () => {
     rootElement.style.setProperty('--color-muted', mainContainer.classList.contains('dark-mode') ? '#A0AEC0' : '#000000ff');
     applyTheme(currentMode);
 };
+
+
+
 darkModeToggle.addEventListener('click', darkModeTheme);
+
+
 
 
 // ==========================================================================
 // 4. TIMER LOGIC & STATE MANAGEMENT
 // ==========================================================================
 
-// Saves the current timer state to localStorage.
-const saveTimerState = (state) => localStorage.setItem('focusSprintTimerState', JSON.stringify(state));
+
+/**
+ * Saves the current timer state to localStorage.
+ * @param {object} state The state object to save.
+ */
+const saveTimerState = (state) => localStorage.setItem('flowtudyTimerState', JSON.stringify(state));
 
 
 
-// Loads the timer state from localStorage.
-const loadTimerState = () => JSON.parse(localStorage.getItem('focusSprintTimerState'));
+/**
+ * Loads the timer state from localStorage.
+ * @returns {object|null} The saved state object or null if none exists.
+ */
+const loadTimerState = () => JSON.parse(localStorage.getItem('flowtudyTimerState'));
 
 
 
@@ -153,7 +213,9 @@ let longBreakCountdown = 3;
 
 
 
-// Creates the cycle indicator dots in the UI.
+/**
+ * Creates the cycle indicator dots in the UI based on settings.
+ */
 const renderCycleIndicators = () => {
     cycleIndicator.innerHTML = '';
     for (let i = 0; i < longBreakSetting; i++) {
@@ -166,7 +228,9 @@ const renderCycleIndicators = () => {
 
 
 
-// Fills the cycle dots based on completed focus sessions.
+/**
+ * Fills the cycle dots based on completed focus sessions.
+ */
 const updateCycleIndicators = () => {
     const dots = document.querySelectorAll('.cycle-dot');
     const completedCycles = longBreakSetting - longBreakCountdown;
@@ -177,7 +241,9 @@ const updateCycleIndicators = () => {
 
 
 
-// The main timer loop, called every second.
+/**
+ * The main timer loop, called every second by setInterval.
+ */
 function tick() {
     const timeLeft = Math.round((endTime - Date.now()) / 1000);
     if (timeLeft < 0) {
@@ -192,32 +258,40 @@ function tick() {
 
 
 
-// Starts the timer countdown.
+/**
+ * Starts the timer countdown.
+ */
 function startTimer() {
     const duration = remainingTimes[currentMode];
     if (duration <= 0) return;
     endTime = Date.now() + duration * 1000;
     timerInterval = setInterval(tick, 1000);
     playPauseButton.classList.add('playing');
-    updatePlayButton(false);
+    updatePlayButtonText();
     saveTimerState({ endTime, currentMode, isRunning: true, longBreakCountdown });
 }
 
 
 
-// Pauses the timer.
+/**
+ * Pauses the timer.
+ */
 function pauseTimer() {
     clearInterval(timerInterval);
     const timeLeft = Math.round((endTime - Date.now()) / 1000);
     remainingTimes[currentMode] = timeLeft > 0 ? timeLeft : 0;
     playPauseButton.classList.remove('playing');
-    updatePlayButton(true);
+    updatePlayButtonText();
     saveTimerState({ remainingTime: remainingTimes[currentMode], currentMode, isRunning: false, longBreakCountdown });
 }
 
 
 
-// Updates the circular progress ring.
+/**
+ * Updates the circular progress ring SVG.
+ * @param {number} timeLeft The remaining time in seconds.
+ * @param {number} totalTime The total time for the current mode in seconds.
+ */
 const updateProgressRing = (timeLeft, totalTime) => {
     if (totalTime <= 0 || timeLeft < 0) {
         progressRing.style.strokeDashoffset = circumference;
@@ -229,46 +303,55 @@ const updateProgressRing = (timeLeft, totalTime) => {
 
 
 
-// Updates the time display and page title.
+/**
+ * Updates the time display on the screen and the page title.
+ * @param {number} time The remaining time in seconds.
+ * @param {number} totalTime The total time for the current mode in seconds.
+ */
 const updateTimerDisplay = (time, totalTime) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
     const formattedTime = `${minutes}:${String(seconds).padStart(2, '0')}`;
     timerDisplay.textContent = formattedTime;
-    document.title = `${formattedTime} - ${translations[currentLanguage].app_name}`;
+    document.title = `${formattedTime} - Flowtudy`;
     updateProgressRing(time, totalTime);
 };
 
 
 
-// Updates the play/pause button's appearance and text.
-const updatePlayButton = (isPaused) => {
-    playPauseButton.classList.toggle('button--playing', !isPaused);
-    updatePlayButtonText();
+/**
+ * Updates the play/pause button's text using the uiStrings object.
+ */
+const updatePlayButtonText = () => {
+    const texts = uiStrings[currentLanguage];
+    playPauseButton.textContent = playPauseButton.classList.contains('playing') ? texts.pause : texts.play;
 };
 
 
 
-// Resets the current timer to its full duration.
+/**
+ * Resets the current timer to its full duration.
+ */
 const resetTimer = () => {
     clearInterval(timerInterval);
     remainingTimes[currentMode] = timers[currentMode];
     updateTimerDisplay(remainingTimes[currentMode], timers[currentMode]);
     playPauseButton.classList.remove('playing');
-    updatePlayButton(true);
-    localStorage.removeItem('focusSprintTimerState');
+    updatePlayButtonText();
+    localStorage.removeItem('flowtudyTimerState');
 };
 
 
 
-// Skips to the next mode in the Pomodoro cycle.
+/**
+ * Skips to the next mode in the Pomodoro cycle.
+ */
 const skipMode = () => {
     clearInterval(timerInterval);
     if (currentMode === 'focus') {
         longBreakCountdown--;
         updateCycleIndicators();
     }
-
     let nextMode;
     if (currentMode === 'focus') {
         nextMode = longBreakCountdown <= 0 ? 'longBreak' : 'break';
@@ -279,20 +362,15 @@ const skipMode = () => {
             updateCycleIndicators();
         }
     }
-
     currentMode = nextMode;
     timerModesButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.mode === currentMode));
-
     applyTheme(currentMode);
     remainingTimes = { ...timers };
     updateTimerDisplay(timers[currentMode], timers[currentMode]);
-
     playPauseButton.classList.remove('playing');
-    updatePlayButton(true);
-
+    updatePlayButtonText();
     const autoStartBreaks = breaksAutoStartInput.checked;
     const autoStartFocus = focusAutoStartInput.checked;
-
     if ((autoStartBreaks && ['break', 'longBreak'].includes(currentMode)) || (autoStartFocus && currentMode === 'focus')) {
         startTimer();
     } else {
@@ -306,7 +384,13 @@ const skipMode = () => {
 playPauseButton.addEventListener('click', () => {
     playPauseButton.classList.contains('playing') ? pauseTimer() : startTimer();
 });
+
+
+
 resetButton.addEventListener('click', resetTimer);
+
+
+
 skipButton.addEventListener('click', skipMode);
 
 
@@ -322,17 +406,22 @@ timerModesButtons.forEach(button => {
         remainingTimes[currentMode] = timers[currentMode];
         updateTimerDisplay(remainingTimes[currentMode], timers[currentMode]);
         playPauseButton.classList.remove('playing');
-        updatePlayButton(true);
+        updatePlayButtonText();
         saveTimerState({ remainingTime: remainingTimes[currentMode], currentMode, isRunning: false, longBreakCountdown });
     });
 });
+
+
 
 
 // ==========================================================================
 // 5. SETTINGS PANEL & NOTIFICATIONS
 // ==========================================================================
 
-// Saves the timer's current state before closing settings.
+
+/**
+ * Saves the timer's current state before closing settings panel.
+ */
 const saveCurrentTimerState = () => {
     const isRunning = playPauseButton.classList.contains('playing');
     if (isRunning) {
@@ -344,7 +433,9 @@ const saveCurrentTimerState = () => {
 
 
 
-// Saves all user settings to localStorage.
+/**
+ * Saves all user settings to localStorage.
+ */
 const saveSettings = () => {
     const settings = {
         focus: usersFocusTime.value || 25,
@@ -356,14 +447,16 @@ const saveSettings = () => {
         sound: soundNotificationInput.checked,
         popup: popUpInput.checked
     };
-    localStorage.setItem('focusSprintSettings', JSON.stringify(settings));
+    localStorage.setItem('flowtudySettings', JSON.stringify(settings));
 };
 
 
 
-// Loads user settings from localStorage on startup.
+/**
+ * Loads user settings from localStorage on startup.
+ */
 const loadSettings = () => {
-    const savedSettings = JSON.parse(localStorage.getItem('focusSprintSettings'));
+    const savedSettings = JSON.parse(localStorage.getItem('flowtudySettings'));
     if (savedSettings) {
         usersFocusTime.value = savedSettings.focus;
         usersBreakTime.value = savedSettings.break;
@@ -374,7 +467,6 @@ const loadSettings = () => {
         soundNotificationInput.checked = savedSettings.sound;
         if (Notification.permission !== 'granted') savedSettings.popup = false;
         popUpInput.checked = savedSettings.popup;
-
         changeTimerDuration('focus', false);
         changeTimerDuration('break', false);
         changeTimerDuration('longBreak', false);
@@ -387,7 +479,9 @@ const loadSettings = () => {
 
 
 
-// Toggles the visibility of the main settings panel.
+/**
+ * Toggles the visibility of the main settings panel.
+ */
 const showSettingsForm = () => {
     settingsForm.hidden = !settingsForm.hidden;
     if (settingsForm.hidden) {
@@ -397,24 +491,21 @@ const showSettingsForm = () => {
 
 
 
-// Updates a timer's duration, recalculating proportionally if it's running.
+/**
+ * Updates a timer's duration, recalculating proportionally if it's running.
+ * @param {string} mode - 'focus', 'break', or 'longBreak'.
+ * @param {boolean} shouldSave - Whether to save settings to localStorage.
+ */
 const changeTimerDuration = (mode, shouldSave = true) => {
     const oldDuration = timers[mode];
-    const inputElement = {
-        focus: usersFocusTime,
-        break: usersBreakTime,
-        longBreak: usersLongBreakTime
-    }[mode];
+    const inputElement = { focus: usersFocusTime, break: usersBreakTime, longBreak: usersLongBreakTime }[mode];
     const defaultValues = { focus: 25, break: 5, longBreak: 15 };
     const newMinutes = inputElement.value || defaultValues[mode];
     const newDuration = newMinutes * 60;
     timers[mode] = newDuration;
-
     if (currentMode === mode) {
         const isRunning = playPauseButton.classList.contains('playing');
-        const timeLeftBeforeChange = isRunning
-            ? Math.round((endTime - Date.now()) / 1000)
-            : remainingTimes[mode];
+        const timeLeftBeforeChange = isRunning ? Math.round((endTime - Date.now()) / 1000) : remainingTimes[mode];
         const progressRatio = oldDuration > 0 ? timeLeftBeforeChange / oldDuration : 1;
         const newTimeLeft = Math.round(newDuration * progressRatio);
         remainingTimes[mode] = newTimeLeft;
@@ -428,7 +519,10 @@ const changeTimerDuration = (mode, shouldSave = true) => {
 
 
 
-// Updates the long break interval setting.
+/**
+ * Updates the long break interval setting.
+ * @param {boolean} shouldSave - Whether to save settings to localStorage.
+ */
 const changeLongBreakInterval = (shouldSave = true) => {
     const newInterval = usersLongBreakInterval.value || 3;
     longBreakSetting = parseInt(newInterval, 10);
@@ -442,7 +536,9 @@ const changeLongBreakInterval = (shouldSave = true) => {
 
 
 
-// Plays the notification sound if enabled.
+/**
+ * Plays the notification sound if enabled.
+ */
 const playSoundNotification = () => {
     if (soundNotificationInput.checked) {
         soundNotification.currentTime = 0;
@@ -452,10 +548,12 @@ const playSoundNotification = () => {
 
 
 
-// Sends a desktop notification if enabled and permission is granted.
+/**
+ * Sends a desktop notification if enabled and permission is granted.
+ */
 const sendDesktopNotification = () => {
     if (popUpInput.checked && Notification.permission === 'granted') {
-        const title = "Focus Sprint";
+        const title = "Flowtudy";
         const body = `Time for your ${currentMode} session is up!`;
         new Notification(title, { body });
     }
@@ -463,7 +561,10 @@ const sendDesktopNotification = () => {
 
 
 
-// Asks for permission to send desktop notifications.
+/**
+ * Asks for permission to send desktop notifications.
+ * @param {boolean} shouldSave - Whether to save settings to localStorage.
+ */
 const handleNotificationPermission = async (shouldSave = true) => {
     if (!('Notification' in window)) {
         popUpInput.checked = false;
@@ -504,15 +605,26 @@ document.addEventListener('click', (event) => {
 });
 
 
+
+
 // ==========================================================================
 // 6. TASKS SECTION LOGIC
 // ==========================================================================
 
-// Shows a confirmation modal for destructive actions.
+
+/**
+ * Shows a confirmation modal for destructive actions.
+ * @param {string} title - The title of the modal.
+ * @param {string} message - The confirmation message.
+ * @returns {Promise<boolean>} - A promise that resolves to true if confirmed, false otherwise.
+ */
 const showConfirmationModal = (title, message) => {
     return new Promise((resolve) => {
+        const texts = uiStrings[currentLanguage];
         modalTitle.textContent = title;
         modalText.textContent = message;
+        modalCancelBtn.textContent = texts.modal_cancel;
+        modalConfirmBtn.textContent = texts.modal_confirm;
         modalOverlay.classList.add('modal-overlay--visible');
         const confirmHandler = () => { cleanup(); resolve(true); };
         const cancelHandler = () => { cleanup(); resolve(false); };
@@ -528,17 +640,22 @@ const showConfirmationModal = (title, message) => {
 
 
 
-// Toggles the visibility of the tasks settings menu.
+/**
+ * Toggles the visibility of the tasks settings menu.
+ */
 const showTasksSettings = () => {
     tasksSettingsForm.hidden = !tasksSettingsForm.hidden;
 };
 
 
 
-// Deletes all tasks after confirmation.
+/**
+ * Deletes all tasks after receiving confirmation.
+ */
 const deleteAllTasks = async () => {
     if (document.querySelectorAll('.task-item').length > 0) {
-        const confirmed = await showConfirmationModal(translations[currentLanguage].delete_all_tasks, translations[currentLanguage].confirm_delete_all);
+        const texts = uiStrings[currentLanguage];
+        const confirmed = await showConfirmationModal(texts.confirm_action, texts.confirm_delete_all);
         if (confirmed) {
             document.querySelectorAll('.task-item').forEach(task => task.remove());
             saveTasks();
@@ -549,10 +666,13 @@ const deleteAllTasks = async () => {
 
 
 
-// Deletes only completed tasks after confirmation.
+/**
+ * Deletes only completed tasks after receiving confirmation.
+ */
 const deleteCompletedTasks = async () => {
     if (document.querySelectorAll('.task-item--completed').length > 0) {
-        const confirmed = await showConfirmationModal(translations[currentLanguage].delete_completed_tasks, translations[currentLanguage].confirm_delete_completed);
+        const texts = uiStrings[currentLanguage];
+        const confirmed = await showConfirmationModal(texts.confirm_action, texts.confirm_delete_completed);
         if (confirmed) {
             document.querySelectorAll('.task-item--completed').forEach(task => task.remove());
             saveTasks();
@@ -563,7 +683,9 @@ const deleteCompletedTasks = async () => {
 
 
 
-// Shows or hides completed tasks based on the current setting.
+/**
+ * Shows or hides completed tasks based on the current setting.
+ */
 const updateCompletedTasksVisibility = () => {
     document.querySelectorAll('.task-item--completed').forEach(task => {
         task.hidden = areCompletedTasksHidden;
@@ -572,10 +694,12 @@ const updateCompletedTasksVisibility = () => {
 
 
 
-// Toggles the setting for hiding/showing completed tasks.
+/**
+ * Toggles the setting for hiding/showing completed tasks.
+ */
 const toggleCompletedTasksVisibility = () => {
     areCompletedTasksHidden = !areCompletedTasksHidden;
-    const texts = translations[currentLanguage];
+    const texts = uiStrings[currentLanguage];
     const buttonText = toggleCompletedTasksButton.querySelector('p');
     const buttonIcon = toggleCompletedTasksButton.querySelector('.material-symbols-outlined');
     buttonText.textContent = areCompletedTasksHidden ? texts.show_completed_tasks : texts.hide_completed_tasks;
@@ -597,28 +721,35 @@ tasksSettingsButton.addEventListener('click', (e) => {
 
 
 
-// Saves the current list of tasks to localStorage.
+/**
+ * Saves the current list of tasks to localStorage.
+ */
 const saveTasks = () => {
     const tasks = Array.from(document.querySelectorAll('.task-item')).map(el => ({
         text: el.querySelector('.task-item__text').textContent,
         completed: el.classList.contains('task-item--completed')
     }));
-    localStorage.setItem('focusSprintTasks', JSON.stringify(tasks));
+    localStorage.setItem('flowtudyTasks', JSON.stringify(tasks));
 };
 
 
 
-// Loads tasks from localStorage on startup.
+/**
+ * Loads tasks from localStorage on startup.
+ */
 const loadTasks = () => {
     tasksContainer.querySelectorAll('.task-item').forEach(task => task.remove());
-    const savedTasks = JSON.parse(localStorage.getItem('focusSprintTasks') || '[]');
+    const savedTasks = JSON.parse(localStorage.getItem('flowtudyTasks') || '[]');
     savedTasks.forEach(task => renderTask(task));
     updateCompletedTasksVisibility();
 };
 
 
 
-// Creates and appends a single task item to the DOM.
+/**
+ * Creates and appends a single task item to the DOM.
+ * @param {object} task - The task object with text and completed status.
+ */
 const renderTask = (task) => {
     const taskItem = document.createElement('div');
     taskItem.className = 'task-item';
@@ -642,7 +773,9 @@ const renderTask = (task) => {
 
 
 
-// Shows the form for creating a new task.
+/**
+ * Shows the form for creating a new task.
+ */
 const showTaskCreator = () => {
     addTaskButton.hidden = true;
     taskCreationForm.hidden = false;
@@ -651,7 +784,9 @@ const showTaskCreator = () => {
 
 
 
-// Hides the form for creating a new task.
+/**
+ * Hides the form for creating a new task.
+ */
 const hideTaskCreator = () => {
     taskCreationForm.hidden = true;
     addTaskButton.hidden = false;
@@ -660,7 +795,9 @@ const hideTaskCreator = () => {
 
 
 
-// Creates a new task from the input value.
+/**
+ * Creates a new task from the input value.
+ */
 const createTask = () => {
     const taskText = taskInput.value.trim();
     if (taskText) {
@@ -672,7 +809,10 @@ const createTask = () => {
 
 
 
-// Puts a task item into editing mode.
+/**
+ * Puts a task item into editing mode.
+ * @param {HTMLElement} taskItem - The task element to edit.
+ */
 const enterEditMode = (taskItem) => {
     taskItem.classList.add('task-item--editing');
     taskItem.querySelector('.task-item__edit-input').focus();
@@ -680,7 +820,10 @@ const enterEditMode = (taskItem) => {
 
 
 
-// Takes a task item out of editing mode.
+/**
+ * Takes a task item out of editing mode.
+ * @param {HTMLElement} taskItem - The task element to exit edit mode from.
+ */
 const exitEditMode = (taskItem) => {
     taskItem.classList.remove('task-item--editing');
 };
@@ -707,7 +850,7 @@ tasksContainer.addEventListener('change', (event) => {
 
 
 
-// Event delegation for actions within the tasks container (edit, delete, options).
+// Event delegation for all actions within the tasks container.
 tasksContainer.addEventListener('click', async (event) => {
     const actionElement = event.target.closest('[data-action]');
     const optionsButton = event.target.closest('.task-item__options');
@@ -720,7 +863,7 @@ tasksContainer.addEventListener('click', async (event) => {
             closeAllMenus();
         }
         if (action === 'delete') {
-            const texts = translations[currentLanguage];
+            const texts = uiStrings[currentLanguage];
             const taskText = taskItem.querySelector('.task-item__text').textContent;
             const msg = texts.confirm_delete_single.replace('{task}', taskText);
             const confirmed = await showConfirmationModal(texts.delete, msg);
@@ -748,20 +891,25 @@ tasksContainer.addEventListener('click', async (event) => {
 
 
 
-// Closes all open task option menus.
+/**
+ * Closes all open task option menus.
+ */
 const closeAllMenus = () => {
     document.querySelectorAll('.task-item__menu.active').forEach(menu => menu.classList.remove('active'));
 };
 
 
 
-// Toggles the visibility of a single task's option menu.
+/**
+ * Toggles the visibility of a single task's option menu.
+ * @param {HTMLElement} taskItem - The parent task item of the menu.
+ */
 const toggleMenu = (taskItem) => {
     let menu = taskItem.querySelector('.task-item__menu');
     const wasActive = menu && menu.classList.contains('active');
     closeAllMenus();
     if (!menu) {
-        const texts = translations[currentLanguage];
+        const texts = uiStrings[currentLanguage];
         menu = document.createElement('div');
         menu.className = 'task-item__menu';
         menu.innerHTML = `<div class="task-item__menu-option" data-action="edit"><span class="material-symbols-outlined">edit</span> ${texts.edit}</div><div class="task-item__menu-option" data-action="delete"><span class="material-symbols-outlined">delete</span> ${texts.delete}</div>`;
@@ -774,7 +922,7 @@ const toggleMenu = (taskItem) => {
 
 
 
-// Global click listener to close task menus.
+// Global click listener to close task menus when clicking outside.
 document.addEventListener('click', (event) => {
     if (!event.target.closest('.task-item')) closeAllMenus();
 });
@@ -786,12 +934,16 @@ tasksContainer.addEventListener('dragstart', (event) => {
     if (event.target.classList.contains('task-item')) event.target.classList.add('dragging');
 });
 
+
+
 tasksContainer.addEventListener('dragend', (event) => {
     if (event.target.classList.contains('task-item')) {
         event.target.classList.remove('dragging');
         saveTasks();
     }
 });
+
+
 
 tasksContainer.addEventListener('dragover', (event) => {
     event.preventDefault();
@@ -803,132 +955,69 @@ tasksContainer.addEventListener('dragover', (event) => {
             const offset = event.clientY - box.top - box.height / 2;
             return (offset < 0 && offset > closest.offset) ? { offset, element: child } : closest;
         }, { offset: Number.NEGATIVE_INFINITY }).element;
-
     tasksContainer.insertBefore(draggingItem, afterElement || addTaskButton);
 });
 
 
+
+
 // ==========================================================================
-// 7. LANGUAGE & TRANSLATION
+// 7. LANGUAGE & NAVIGATION
 // ==========================================================================
+
 
 const languageButton = document.querySelector('.js-language-button');
 const languageMenu = document.querySelector('.js-language-menu');
-const languageOptions = document.querySelectorAll('.js-language-option');
 let currentLanguage = 'en';
 
 
 
-// Detects the user's browser language.
-const detectBrowserLanguage = () => {
-    const lang = (navigator.language || navigator.userLanguage).slice(0, 2);
-    if (lang === 'pt') return 'pt-BR';
-    if (lang === 'es') return 'es';
-    return 'en';
+/**
+ * Saves the selected language to localStorage.
+ * @param {string} lang - The language code (e.g., 'en', 'pt-BR').
+ */
+const saveLanguage = (lang) => localStorage.setItem('flowtudyLanguage', lang);
+
+
+
+/**
+ * Dynamically creates the language menu options as actual links.
+ */
+const updateLanguageMenu = () => {
+    // Define the language options as an array of objects
+    const languages = [
+        { code: 'en', name: 'EN', flag: '🇺🇸', path: '/', active: currentLanguage === 'en' },
+        { code: 'pt-BR', name: 'PT-BR', flag: '🇧🇷', path: '/pt/', active: currentLanguage === 'pt-BR' },
+        { code: 'es', name: 'ES', flag: '🇪🇸', path: '/es/', active: currentLanguage === 'es' }
+    ];
+
+    // Build the HTML for the menu using the array
+    languageMenu.innerHTML = languages.map(lang => `
+        <a href="${lang.path}" class="language-option ${lang.active ? 'active' : ''}">
+            <span class="language-flag">${lang.flag}</span> 
+            ${lang.name} 
+            <span class="material-symbols-outlined language-check">check</span>
+        </a>
+    `).join('');
 };
 
 
 
-// Saves the selected language to localStorage.
-const saveLanguage = (lang) => localStorage.setItem('focusSprintLanguage', lang);
-
-
-
-// Loads the saved language or detects the browser language.
-const loadLanguage = () => localStorage.getItem('focusSprintLanguage') || detectBrowserLanguage();
-
-
-
-// Updates the active state in the language selection menu.
-const updateLanguageMenu = (lang) => {
-    languageOptions.forEach(option => option.classList.toggle('active', option.dataset.lang === lang));
-};
-
-
-
-// Updates the text of the main play/pause button.
-const updatePlayButtonText = () => {
-    const texts = translations[currentLanguage];
-    playPauseButton.textContent = playPauseButton.classList.contains('playing') ? texts.pause : texts.play;
-};
-
-
-
-// Translates all static text content on the page.
-const translateContent = (lang) => {
-    const texts = translations[lang];
-    document.documentElement.lang = lang.startsWith('pt') ? 'pt-BR' : lang;
-
-    document.querySelector('.js-focus-button').textContent = texts.focus_time;
-    document.querySelector('.js-break-button').textContent = texts.break;
-    document.querySelector('.js-long-break-button').textContent = texts.long_break;
-    document.querySelector('#tasks-heading').textContent = texts.tasks;
-    document.querySelector('.js-add-task-button').innerHTML = `<span class="material-symbols-outlined">add</span> ${texts.add_task}`;
-    taskInput.placeholder = texts.task_placeholder;
-    saveTaskButton.textContent = texts.save;
-    cancelTaskButton.textContent = texts.cancel;
-    deleteAllTasksButton.querySelector('p').textContent = texts.delete_all_tasks;
-    deleteCompletedTasksButton.querySelector('p').textContent = texts.delete_completed_tasks;
-    const toggleButton = toggleCompletedTasksButton.querySelector('p');
-    toggleButton.textContent = areCompletedTasksHidden ? texts.show_completed_tasks : texts.hide_completed_tasks;
-    settingsForm.querySelector('h2').textContent = texts.settings;
-    const settingsOptions = settingsForm.querySelectorAll('.settings__section:nth-of-type(1) .settings__options p');
-    settingsOptions[0].textContent = texts.auto_start_breaks;
-    settingsOptions[1].textContent = texts.auto_start_focus;
-    const longBreakP = showLongBreakInterval.parentElement;
-    longBreakP.childNodes[0].nodeValue = `${texts.long_break_interval} `;
-    longBreakP.childNodes[2].nodeValue = ` ${texts.breaks}`;
-    settingsForm.querySelector('.settings__section:nth-of-type(2) > p').textContent = texts.timers;
-    const timerLabels = settingsForm.querySelectorAll('.settings__timers--labels');
-    timerLabels[0].childNodes[0].nodeValue = `${texts.focus} `;
-    timerLabels[1].childNodes[0].nodeValue = `${texts.break_time} `;
-    timerLabels[2].childNodes[0].nodeValue = `${texts.long_break_time} `;
-    settingsForm.querySelector('.settings__section:nth-of-type(3) > p').textContent = texts.notifications;
-    const notificationTexts = settingsForm.querySelectorAll('.settings__notifications--text');
-    notificationTexts[0].textContent = texts.sound_alarm;
-    notificationTexts[1].textContent = texts.pop_up;
-    resetButton.setAttribute('aria-label', texts.reset);
-    skipButton.setAttribute('aria-label', texts.skip);
-    darkModeToggle.setAttribute('aria-label', texts.dark_mode);
-    settingsButton.setAttribute('aria-label', texts.settings_button);
-    tasksSettingsButton.setAttribute('aria-label', texts.more_options);
-    document.querySelector('.scroll-down-indicator').setAttribute('aria-label', texts.scroll_down);
-
-    updatePlayButtonText();
-    updateInfoSection(texts);
-};
-
-
-
-// Translates the informational cards section.
-const updateInfoSection = (texts) => {
-    const section = document.querySelector('.info-section');
-    if (!section) return;
-    section.querySelector('.info-section__title').textContent = texts.info_title;
-    const cards = section.querySelectorAll('.info-card');
-    cards[0].querySelector('h3').innerHTML = `<span class="material-symbols-outlined">help_outline</span> ${texts.info_what_is}`;
-    cards[0].querySelector('p').textContent = texts.info_what_is_text;
-    cards[1].querySelector('h3').innerHTML = `<span class="material-symbols-outlined">stacks</span> ${texts.info_how_it_works}`;
-    cards[1].querySelectorAll('li span').forEach((span, i) => { span.textContent = texts.info_steps[i]; });
-    cards[2].querySelector('h3').innerHTML = `<span class="material-symbols-outlined">thumb_up</span> ${texts.info_why_use}`;
-    cards[2].querySelectorAll('.info-card__list--benefits li').forEach((li, i) => {
-        const benefit = texts.info_benefits[i];
-        li.querySelector('.material-symbols-outlined').textContent = benefit.icon;
-        li.querySelector('div').innerHTML = `<strong>${benefit.title}</strong> ${benefit.text}`;
-    });
-    cards[3].querySelector('h3').innerHTML = `<span class="material-symbols-outlined">school</span> ${texts.info_tips}`;
-    cards[3].querySelectorAll('ul li').forEach((li, i) => { li.innerHTML = texts.info_tips_list[i]; });
-};
-
-
-
-// Changes the application's language.
-const changeLanguage = (lang) => {
-    currentLanguage = lang;
-    saveLanguage(lang);
-    updateLanguageMenu(lang);
-    translateContent(lang);
-    languageMenu.classList.remove('active');
+/**
+ * Initializes the language on page load based on the HTML lang attribute.
+ */
+const initLanguage = () => {
+    const pageLang = document.documentElement.lang;
+    if (pageLang.startsWith('pt')) {
+        currentLanguage = 'pt-BR';
+    } else if (pageLang === 'es') {
+        currentLanguage = 'es';
+    } else {
+        currentLanguage = 'en';
+    }
+    saveLanguage(currentLanguage);
+    updateLanguageMenu();
+    updatePlayButtonText(); // Crucial to set the initial play button text
 };
 
 
@@ -938,9 +1027,9 @@ languageButton.addEventListener('click', (e) => {
     e.stopPropagation();
     languageMenu.classList.toggle('active');
 });
-languageOptions.forEach(option => {
-    option.addEventListener('click', () => changeLanguage(option.dataset.lang));
-});
+
+
+
 document.addEventListener('click', (e) => {
     if (languageMenu.classList.contains('active') && !languageButton.contains(e.target) && !languageMenu.contains(e.target)) {
         languageMenu.classList.remove('active');
@@ -949,44 +1038,39 @@ document.addEventListener('click', (e) => {
 
 
 
-// Initializes the language on page load.
-const initLanguage = () => {
-    currentLanguage = loadLanguage();
-    updateLanguageMenu(currentLanguage);
-    translateContent(currentLanguage);
-};
-
 
 // ==========================================================================
 // 8. INITIALIZATION ON PAGE LOAD
 // ==========================================================================
 
-// This function runs when the page has finished loading.
+
+/**
+ * This function runs when the page has finished loading.
+ */
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize the progress ring SVG stroke
     progressRing.style.strokeDasharray = `${circumference} ${circumference}`;
 
-    // Set up the application in the correct order.
+    // Set up the application in the correct order
     initLanguage();
     loadSettings();
     loadTasks();
     renderCycleIndicators();
 
-    // Restore the timer state if it exists.
+    // Restore the timer state from localStorage if it exists
     const savedTimer = loadTimerState();
     if (savedTimer) {
         currentMode = savedTimer.currentMode;
         longBreakCountdown = savedTimer.longBreakCountdown ?? longBreakSetting;
         updateCycleIndicators();
-
         timerModesButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.mode === currentMode));
         applyTheme(currentMode);
-
         if (savedTimer.isRunning) {
             const timeLeft = Math.round((savedTimer.endTime - Date.now()) / 1000);
             if (timeLeft > 0) {
                 remainingTimes[currentMode] = timeLeft;
                 startTimer();
-                tick();
+                tick(); // Call tick once immediately to avoid 1s delay in display
             } else {
                 skipMode();
             }
@@ -995,10 +1079,11 @@ document.addEventListener('DOMContentLoaded', () => {
             updateTimerDisplay(savedTimer.remainingTime, timers[currentMode]);
         }
     } else {
+        // If no saved state, set the initial display for focus mode
         updateTimerDisplay(timers.focus, timers.focus);
     }
 
-    // Set up the animation for the info cards.
+    // Set up the intersection observer for info card animations
     const infoCards = document.querySelectorAll('.info-card');
     if (infoCards.length > 0) {
         const observer = new IntersectionObserver((entries) => {
