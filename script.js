@@ -1193,6 +1193,7 @@ document.addEventListener('DOMContentLoaded', () => {
         infoCards.forEach(card => observer.observe(card));
     }
 
+    console.log('Tentando registrar o Service Worker...'); 
     // Service Worker Registration
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
