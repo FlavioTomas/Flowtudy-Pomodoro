@@ -1112,11 +1112,19 @@ const isIOS = () => {
  */
 const isPWA = () => {
     return new Promise((resolve) => {
+        const hasPwaParam = new URLSearchParams(window.location.search).has('mode');
+        if (hasPwaParam) {
+            resolve(true);
+            return;
+        }
+
         setTimeout(() => {
             const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+            
             const isIOSStandalone = window.navigator.standalone === true;
+
             resolve(isStandalone || isIOSStandalone);
-        }, 200); 
+        }, 200);
     });
 };
 
