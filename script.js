@@ -1180,4 +1180,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { threshold: 0.1 });
         infoCards.forEach(card => observer.observe(card));
     }
+
+
+     // CÓDIGO DE DIAGNÓSTICO
+    setTimeout(() => {
+        const debugInfo = document.getElementById('debug-info');
+        if (debugInfo) {
+            const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+            const isIOSStandalone = window.navigator.standalone; // Ver o valor exato
+            debugInfo.innerHTML = `
+                display-mode: ${isStandalone} <br>
+                navigator.standalone: ${isIOSStandalone}
+            `;
+        }
+    }, 500); // Atraso de meio segundo para dar tempo ao navegador
 });
