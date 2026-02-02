@@ -1120,7 +1120,7 @@ const isPWA = () => {
 
         setTimeout(() => {
             const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
-            
+
             const isIOSStandalone = window.navigator.standalone === true;
 
             resolve(isStandalone || isIOSStandalone);
@@ -1191,5 +1191,18 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }, { threshold: 0.1 });
         infoCards.forEach(card => observer.observe(card));
+    }
+
+    // Service Worker Registration
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                    console.log('Service Worker registrado com sucesso:', registration);
+                })
+                .catch(error => {
+                    console.log('Falha ao registrar o Service Worker:', error);
+                });
+        });
     }
 });
