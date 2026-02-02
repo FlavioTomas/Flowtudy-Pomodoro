@@ -313,7 +313,7 @@ const updateProgressRing = (timeLeft, totalTime) => {
  */
 const updateTimerDisplay = (time, totalTime) => {
     const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
+    const seconds = Math.floor(time % 60);
     const formattedTime = `${minutes}:${String(seconds).padStart(2, '0')}`;
     timerDisplay.textContent = formattedTime;
     document.title = `${formattedTime} - Flowtudy`;
@@ -1124,7 +1124,7 @@ const isPWA = () => {
             const isIOSStandalone = window.navigator.standalone === true;
 
             resolve(isStandalone || isIOSStandalone);
-        }, 200);
+        }, 500);
     });
 };
 
