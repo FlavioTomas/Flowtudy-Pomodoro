@@ -35,16 +35,8 @@
 // ==========================================================================
 // 1. VARIABLE DECLARATIONS
 // ==========================================================================
-// FUNÇÃO DE DEBUG TEMPORÁRIA
-const debugMobileDetection = () => {
-    const userAgent = navigator.userAgent;
-    const platform = navigator.platform;
-    const maxTouchPoints = navigator.maxTouchPoints || 0;
 
-    const message = `--- Mobile Debug Info ---\n\nUser Agent: ${userAgent}\n\nPlatform: ${platform}\n\nMax Touch Points: ${maxTouchPoints}`;
 
-    alert(message);
-};
 
 // Selects all necessary DOM elements for manipulation.
 const focusButton = document.querySelector('.js-focus-button');
@@ -579,7 +571,7 @@ const sendDesktopNotification = () => {
  */
 const handleNotificationPermission = async (shouldSave = true) => {
     // If it's a mobile device, show the instructions modal
-    if (isMobile()) {
+    if (isMobile() && !isPWA()) {
         const modal = iosModalOverlay.querySelector('.modal');
         // Clean up old classes and add the correct one for the current OS
         modal.classList.remove('modal--show-ios', 'modal--show-android');
@@ -593,7 +585,7 @@ const handleNotificationPermission = async (shouldSave = true) => {
         return; // Stop the function here for mobile
     }
 
-    // Original logic for Desktop browsers
+    // Original logic for Desktop browsers and PWAs
     if (!('Notification' in window)) {
         console.log("This browser does not support desktop notification");
         popUpInput.checked = false;
@@ -1111,6 +1103,21 @@ const isIOS = () => {
 
 
 
+/**
+ * Checks if the app is running in standalone mode (as a PWA).
+ * @returns {boolean}
+ */
+const isPWA = () => {
+    // Check for the standard 'display-mode' media query
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+    // Fallback for older iOS devices
+    const isIOSStandalone = window.navigator.standalone === true;
+
+    return isStandalone || isIOSStandalone;
+};
+
+
+
 
 // ==========================================================================
 // 8. INITIALIZATION ON PAGE LOAD
@@ -1121,11 +1128,6 @@ const isIOS = () => {
  * This function runs when the page has finished loading.
  */
 document.addEventListener('DOMContentLoaded', () => {
-    document.addEventListener('DOMContentLoaded', () => {
-        debugMobileDetection(); // <-- Adicione esta linha
-
-        // ... o resto do seu código de inicialização ...
-    });
     progressRing = document.querySelector('.js-progress-ring');
     radius = parseFloat(progressRing.getAttribute('r'));
     circumference = 2 * Math.PI * radius;
