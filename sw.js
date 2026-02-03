@@ -1,5 +1,5 @@
 // This will trigger the service worker to update.
-const CACHE_NAME = 'flowtudy-cache-v1.2.3';
+const CACHE_NAME = 'flowtudy-cache-v1.2.4';
 
 // A list of all the essential files your app needs to work offline.
 const FILES_TO_CACHE = [
